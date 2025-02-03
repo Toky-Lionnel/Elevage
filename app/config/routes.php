@@ -40,5 +40,8 @@ $router->post('/depot',[$Depot_Controller,'updateArgent']);
 
 $router->get('/animaux/liste/vente',[$Vente_Controller,'listAnimalsForSale']);
 $router->get('/animaux/liste', [$Animaux_Controller, 'listerAnimaux']);
+<<<<<<< HEAD
 
 $router->get('/animaux/achat/@id', [$Vente_Controller,'acheterAnimal']);
+=======
+>>>>>>> 9bdf6c65a956f95f4df82a0cf2f99712c2bc677b
