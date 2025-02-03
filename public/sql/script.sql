@@ -30,7 +30,7 @@ CREATE TABLE elevage_Animal(
    poids_actuel DECIMAL(10,2) NOT NULL,
    image_animal VARCHAR(255) NOT NULL,
    nom_animal VARCHAR(60),
-   en_ventre INT, -- 0 en vente | 1 pas en vente
+   en_vente INT, -- 0 en vente | 1 pas en vente
    FOREIGN KEY(id_type_animal) REFERENCES elevage_Type_Animal(id_type_animal)
 );
 
