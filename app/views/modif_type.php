@@ -42,6 +42,7 @@
                             <input type="number" class="form-control" name="perte_poids" value="<?= $type['perte_poids'] ?>" required />
                         </div>
 
+                        
 
                         <div class="mb-3">
                             <label for="defaultSelect" class="form-label"> Alimentation </label>

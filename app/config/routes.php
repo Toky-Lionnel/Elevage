@@ -6,7 +6,7 @@ use app\controllers\DepotController;
 use app\controllers\VenteController;
 use app\controllers\AnimauxController;
 use app\controllers\FoodController;
-
+use app\controllers\PrevisionController;
 use flight\Engine;
 use flight\net\Router;
 //use Flight;
@@ -17,6 +17,7 @@ $Depot_Controller = new DepotController();
 $Vente_Controller = new VenteController();
 $Animaux_Controller = new AnimauxController();
 $Food_Controller = new FoodController();
+$Prevision_Controller = new PrevisionController();
 
 $router->get('/', [$Login_Controller, 'loginUtilisateur']);
 $router->post('/connexion', [$Login_Controller, 'verifUtilisateur']);
@@ -45,4 +46,11 @@ $router->get('/animaux/liste', [$Animaux_Controller, 'listerAnimaux']);
 
 $router->get('/animaux/achat/@id', [$Vente_Controller,'acheterAnimal']);
 
+$router->post('/animaux/nourrir/@id_animal:[0-9]+', [$Animaux_Controller, 'nourrirAnimal']);
+
+
+
 $router->get('/liste/alimentation', [$Food_Controller, 'listAliments']);
+
+
+$router->get('/prevision',[$Prevision_Controller,'prepaPrevision']);

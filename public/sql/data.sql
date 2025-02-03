@@ -42,7 +42,7 @@ VALUES
 (5, 2.8, 'lapin5.jpg', 'Lapin E', 0);
 
 
-INSERT INTO elevage_Historique_Alimentaion (id_animal, date_alimentation, poids) VALUES
+INSERT INTO elevage_Historique_Alimentation (id_animal, date_alimentation, poids) VALUES
 (1, '2025-01-28', 2.5),
 (1, '2025-02-01', 2.6),
 (2, '2025-01-25', 300.0),
