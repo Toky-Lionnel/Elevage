@@ -47,8 +47,16 @@ class MesAnimauxModel
         // Vérification si la quantité en stock est suffisante
         return ($quantite_stock !== false && $quantite_stock >= 1);
     }
-    
-    
+
+    public function updatequantité ($id_alimentation){
+        $stmt = $this->db->prepare("
+            UPDATE elevage_Stock
+            SET quantite = quantite - 1
+            WHERE id_alimentation = ?
+        ");
+        $stmt->execute([$id_alimentation]);
+    }
+
     
 
 }
