@@ -5,7 +5,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th> Id type animal </th>
                     <th> Nom Type  </th>
                     <th> Poids min vente </th>
                     <th> Prix vente kg </th>
@@ -13,6 +12,7 @@
                     <th> Nb Jour sans manger  </th>
                     <th> % perte poids </th>
                     <th> Alimentation </th>
+                    <th> Gain </th>
                     <th>Modifier</th>
                 </tr>
             </thead>
@@ -20,7 +20,6 @@
 
                 <?php foreach ($allType as $type) { ?>
                     <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong> <?= $type['id_type_animal'] ?> </strong></td>
                         <td> <?= $type['nom_type'] ?></td>
                         <td> <?= $type['poids_min_vente'] ?> </td>
                         <td> <?= $type['prix_vente_kg'] ?> </td>
@@ -28,6 +27,7 @@
                         <td> <?= $type['nb_jour_sans_manger'] ?> </td>
                         <td> <?= $type['perte_poids'] ?> </td>
                         <td> <?= $type['nom_aliment'] ?> </td>
+                        <td> <?= $type['gain'] ?> </td>
 
 
                         <td>

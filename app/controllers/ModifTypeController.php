@@ -44,10 +44,12 @@ class ModifTypeController {
         $nb_jour = $data->nb_jour;
         $perte = $data->perte_poids;
         $alim = $data->alimentation;
-
+       
         Flight::ModifTypeModel()->modifierTypeAnimal($id,$nom, $poids_min, $poids_max,$prix,$nb_jour,$perte,$alim);
         Flight::redirect(constant('BASE_URL').'type/liste');
     }
+
+    
 
 
 

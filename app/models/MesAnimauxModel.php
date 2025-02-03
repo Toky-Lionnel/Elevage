@@ -25,14 +25,14 @@ class MesAnimauxModel
 
     public function getAlimentId($id_type_animal) {
         $stmt = $this->db->prepare("
-            SELECT t.id_alimentation 
-            FROM elevage_Type_Animal t
-            WHERE t.id_type_animal = ?
+            SELECT id_alimentation 
+            FROM elevage_Type_Animal 
+            WHERE id_type_animal = ?
         ");
         $stmt->execute([$id_type_animal]);
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne l'ID de l'aliment
+        return $stmt->fetchColumn(); // Retourne directement l'ID de l'alimentation
     }
+    
 
     public function verifierStockAliment($id_alimentation) {
         $stmt = $this->db->prepare("

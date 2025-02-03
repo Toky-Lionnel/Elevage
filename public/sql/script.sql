@@ -42,7 +42,7 @@ CREATE TABLE elevage_Argent (
 );
 
 
-CREATE TABLE elevage_Historique_Alimentaion(
+CREATE TABLE elevage_Historique_Alimentation(
    id_historique INTEGER AUTO_INCREMENT PRIMARY KEY,
    id_animal INT,
    date_alimentation DATE NOT NULL,

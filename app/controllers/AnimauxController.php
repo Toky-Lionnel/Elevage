@@ -29,7 +29,7 @@ class AnimauxController {
         $stock = Flight::MesAnimauxModel()->verifierStockAliment($idAliment);
         if($stock == true){
             Flight::MesAnimauxModel()->updatequantite($idAliment);
-            Flight::insertHistoriqueAlimentation($idAnimal, $date_alimentation);
+            Flight::MesAnimauxModel()->insertHistoriqueAlimentation($idAnimal, $date_alimentation);
         }
         Flight::redirect(constant('BASE_URL').'animaux/liste');
     }
