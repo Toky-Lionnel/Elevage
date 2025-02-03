@@ -47,3 +47,9 @@ CREATE TABLE elevage_Historique_Alimentaion(
    poids DECIMAL(10,2),
    FOREIGN KEY(id_animal) REFERENCES elevage_Animal(id_animal)
 );
+
+CREATE TABLE gain (
+   id_gain INTEGER AUTO_INCREMENT PRIMARY KEY,
+   id_type_animal INT,
+   pourcentage DECIMAL(10,2)
+);

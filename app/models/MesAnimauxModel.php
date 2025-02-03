@@ -22,6 +22,33 @@ class MesAnimauxModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getAlimentId($id_type_animal) {
+        $stmt = $this->db->prepare("
+            SELECT t.id_alimentation 
+            FROM elevage_Type_Animal t
+            WHERE t.id_type_animal = ?
+        ");
+        $stmt->execute([$id_type_animal]);
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne l'ID de l'aliment
+    }
+
+    public function verifierStockAliment($id_alimentation) {
+        $stmt = $this->db->prepare("
+            SELECT quantite 
+            FROM elevage_Stock
+            WHERE id_alimentation = ?
+        ");
+        $stmt->execute([$id_alimentation]);
+    
+        $quantite_stock = $stmt->fetchAll(PDO::FETCH_ASSOC); // Récupère la quantité en stock
+    
+        // Vérification si la quantité en stock est suffisante
+        return ($quantite_stock !== false && $quantite_stock >= 1);
+    }
+    
+    
     
 
 }

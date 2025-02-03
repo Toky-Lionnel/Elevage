@@ -39,6 +39,7 @@ VALUES
 (5, 2.2, 'lapin2.jpg', 'Lapin B', 0),
 (5, 2.4, 'lapin3.jpg', 'Lapin C', 1),
 (5, 2.6, 'lapin4.jpg', 'Lapin D', 0),
+<<<<<<< Updated upstream
 (5, 2.8, 'lapin5.jpg', 'Lapin E', 0)
 
 
@@ -55,3 +56,20 @@ INSERT INTO elevage_Historique_Alimentaion (id_animal, date_alimentation, poids)
 
 
 INSERT INTO elevage_Argent(argent) VALUES(0);
+=======
+(5, 2.8, 'lapin5.jpg', 'Lapin E', 0);
+
+INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (1, 100);
+INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (2, 20);
+INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (3, 3);
+INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (4, 40);
+INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (5, 5);
+
+INSERT INTO gain (id_type_animal, pourcentage) VALUES
+(1, 15.00), -- Poulet
+(2, 10.00), -- Bœuf
+(3, 12.00), -- Mouton
+(4, 8.00),  -- Cochon
+(5, 18.00); -- Lapin
+
+>>>>>>> Stashed changes
