@@ -25,6 +25,8 @@ $router->get('/template', [$Login_Controller, 'prepaAjoutThe']);
 $router->group('/type' , function () use ($router,$Modif_Type_Controller) {
 
 	$router->get('/liste',[$Modif_Type_Controller,'listeTypeAnimal']);
+    $router->get('/modifier/@id_type:[0-9]+',[$Modif_Type_Controller , 'prepaModifType']);
+    $router->post('/modifier/@id_type:[0-9]+',[$Modif_Type_Controller , 'modificationType']);
 
 
 });
