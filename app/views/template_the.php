@@ -34,7 +34,7 @@
                     <?php if (!isset($accueil)) { ?>
                         <div class="row w-100 justify-content-center mt-4 mb-5">
                             <div class="col-md-6 col-lg-5 text-center">
-                                <a href="/admin/accueil" class="btn btn-outline-secondary">
+                                <a href="<?= constant('BASE_URL') ?>accueil" class="btn btn-outline-secondary">
                                     <i class="tf-icons bx bx-arrow-back"></i> Retour
                                 </a>
                             </div>
