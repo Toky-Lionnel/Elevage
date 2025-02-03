@@ -1,9 +1,9 @@
-INSERT INTO elevage_Alimentation (nom_aliment) VALUES
-('Maïs'),
-('Soja'),
-('Foin'),
-('Granulés'),
-('Herbe');
+INSERT INTO elevage_Alimentation (nom_aliment, image_url, gain) VALUES
+('Maïs', 'url_maïs.jpg', 5.00),
+('Soja', 'url_soja.jpg', 6.50),
+('Foin', 'url_foin.jpg', 2.50),
+('Granulés', 'url_granules.jpg', 7.00),
+('Herbe', 'url_herbe.jpg', 3.00);
 
 INSERT INTO elevage_Type_Animal (nom_type, poids_min_vente, poids_maximal, prix_vente_kg, nb_jour_sans_manger, perte_poids, id_alimentation) VALUES
 ('Poulet', 1.20, 3.50, 5.00, 3, 0.10, 1),
@@ -41,8 +41,6 @@ VALUES
 (5, 2.6, 'lapin4.jpg', 'Lapin D', 0),
 (5, 2.8, 'lapin5.jpg', 'Lapin E', 0);
 
-<<<<<<< HEAD
-=======
 
 INSERT INTO elevage_Historique_Alimentaion (id_animal, date_alimentation, poids) VALUES
 (1, '2025-01-28', 2.5),
@@ -64,13 +62,3 @@ INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (3, 3);
 INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (4, 40);
 INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (5, 5);
 
-UPDATE elevage_Alimentation
-SET gain = CASE 
-    WHEN nom_aliment = 'Maïs' THEN 5.00
-    WHEN nom_aliment = 'Soja' THEN 6.50
-    WHEN nom_aliment = 'Foin' THEN 2.50
-    WHEN nom_aliment = 'Granulés' THEN 7.00
-    WHEN nom_aliment = 'Herbe' THEN 3.00
-    ELSE gain
-END;
->>>>>>> 9bdf6c65a956f95f4df82a0cf2f99712c2bc677b
