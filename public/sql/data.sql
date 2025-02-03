@@ -34,9 +34,10 @@ VALUES
 (4, 51.0, 'cochon2.jpg', 'Cochon B', 0),
 (4, 52.0, 'cochon3.jpg', 'Cochon C', 1),
 (4, 53.0, 'cochon4.jpg', 'Cochon D', 0),
-(4, 54.0, 'cochon5.jpg', 'Cochon E', 0);
+(4, 54.0, 'cochon5.jpg', 'Cochon E', 0),
 (5, 2.0, 'lapin1.jpg', 'Lapin A', 0),
 (5, 2.2, 'lapin2.jpg', 'Lapin B', 0),
 (5, 2.4, 'lapin3.jpg', 'Lapin C', 1),
 (5, 2.6, 'lapin4.jpg', 'Lapin D', 0),
 (5, 2.8, 'lapin5.jpg', 'Lapin E', 0);
+

@@ -3,12 +3,9 @@
 use app\controllers\LoginController;
 use app\controllers\ModifTypeController;
 use app\controllers\DepotController;
-<<<<<<< HEAD
 use app\controllers\VenteController;
-=======
 use app\controllers\AnimauxController;
 
->>>>>>> c22cb3dc7a1b5e359f6e5e702e4dbf673f449e2e
 use flight\Engine;
 use flight\net\Router;
 //use Flight;
@@ -16,11 +13,8 @@ use flight\net\Router;
 $Login_Controller = new LoginController();
 $Modif_Type_Controller = new ModifTypeController();
 $Depot_Controller = new DepotController();
-<<<<<<< HEAD
 $Vente_Controller = new VenteController();
-=======
 $Animaux_Controller = new AnimauxController();
->>>>>>> c22cb3dc7a1b5e359f6e5e702e4dbf673f449e2e
 
 $router->get('/', [$Login_Controller, 'loginUtilisateur']);
 $router->post('/connexion', [$Login_Controller, 'verifUtilisateur']);
@@ -41,11 +35,10 @@ $router->group('/type' , function () use ($router, $Modif_Type_Controller) {
 $router->get('/depot', [$Depot_Controller, 'preDepot']);
 $router->post('/depot', [$Depot_Controller, 'updateArgent']);
 
-<<<<<<< HEAD
 $router->get('/depot',[$Depot_Controller,'preDepot']);
 $router->post('/depot',[$Depot_Controller,'updateArgent']);
 
 $router->get('/animaux/liste/vente',[$Vente_Controller,'listAnimalsForSale']);
-=======
 $router->get('/animaux/liste', [$Animaux_Controller, 'listerAnimaux']);
->>>>>>> c22cb3dc7a1b5e359f6e5e702e4dbf673f449e2e
+
+$router->get('/animaux/achat/@id', [$Vente_Controller,'acheterAnimal']);

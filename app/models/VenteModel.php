@@ -20,6 +20,7 @@ class VenteModel
     public function getAnimalsForSale(){
         $stmt = $this->db->prepare("
             SELECT 
+                a.id_animal,
                 a.nom_animal,
                 a.poids_initial,
                 a.image_animal,
@@ -34,5 +35,20 @@ class VenteModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function acheterAnimal($id_animal) {
+        $stmt = $this->db->prepare("UPDATE elevage_Animal SET en_vente = 1 WHERE id_animal = :id_animal");
+        $result = $stmt->execute([':id_animal' => $id_animal]);
+        
+        if ($result) {
+            return true; 
+        } else {
+            $errorInfo = $stmt->errorInfo();
+            error_log("Erreur lors de l'achat de l'animal: " . $errorInfo[2]); 
+            return false; 
+        }
+    }
+    
+    
 
 }
