@@ -58,7 +58,7 @@ class MesAnimauxModel
     }
 
     public function insertHistoriqueAlimentation($id_animal, $date_alimentation) {
-        // Préparation de la requête pour récupérer le gain de l'aliment associé à l'animal
+        // Récupérer les informations de gain et poids initial
         $stmt = $this->db->prepare("
             SELECT a.gain, an.poids_initial
             FROM elevage_Animal an
@@ -67,28 +67,35 @@ class MesAnimauxModel
             WHERE an.id_animal = ?
         ");
         $stmt->execute([$id_animal]);
-    
-        // Récupération des résultats
         $animalData = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        if ($animalData) {
-            // Calcul du nouveau poids
-            $gain = $animalData['gain'];
-            $poids_initial = $animalData['poids_initial'];
-            $nouveau_poids = $poids_initial * (1 + ($gain / 100));
     
-            // Préparation de la requête d'insertion dans la table elevage_Historique_Alimentation
-            $stmt = $this->db->prepare("
-                INSERT INTO elevage_Historique_Alimentation (id_animal, date_alimentation, poids)
-                VALUES (?, ?, ?)
-            ");
-            
-            // Exécution de l'insertion avec les paramètres
-            $stmt->execute([$id_animal, $date_alimentation, $nouveau_poids]);
-        }
+        $gain = $animalData['gain'];
+        $poids_initial = $animalData['poids_initial'];
+    
+        // Récupérer le dernier poids enregistré dans l'historique
+        $stmt = $this->db->prepare("
+            SELECT poids FROM elevage_Historique_Alimentation
+            WHERE id_animal = ?
+            ORDER BY date_alimentation DESC
+            LIMIT 1
+        ");
+        $stmt->execute([$id_animal]);
+        $lastWeight = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // Si l'animal a déjà été nourri, prendre le dernier poids enregistré, sinon poids_initial
+        $poids_actuel = $lastWeight ? $lastWeight['poids'] : $poids_initial;
+    
+        // Calcul du nouveau poids
+        $nouveau_poids = $poids_actuel + (($gain / 100) * $poids_actuel);
+    
+        // Insérer le nouveau poids dans l'historique
+        $stmt = $this->db->prepare("
+            INSERT INTO elevage_Historique_Alimentation (id_animal, date_alimentation, poids)
+            VALUES (?, ?, ?)
+        ");
+        $stmt->execute([$id_animal, $date_alimentation, $nouveau_poids]);
     }
-
-    
     
     
 
