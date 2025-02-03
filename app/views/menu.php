@@ -26,7 +26,7 @@
 
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/type/liste" class="menu-link">
+          <a href="<?php constant('BASE_URL')?>type/liste" class="menu-link">
             <div data-i18n="Without menu">Modification Type Animal </div>
           </a>
         </li>

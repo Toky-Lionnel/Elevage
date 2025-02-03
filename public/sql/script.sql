@@ -8,11 +8,12 @@ CREATE TABLE elevage_Type_Animal(
    id_type_animal INTEGER AUTO_INCREMENT PRIMARY KEY,
    nom_type VARCHAR(50) NOT NULL,
    poids_min_vente DECIMAL(10,2) NOT NULL,
+   poids_maximal DECIMAL(10,2) NOT NULL,
    prix_vente_kg DECIMAL(10,2) NOT NULL,
    nb_jour_sans_manger INT,
    perte_poids DECIMAL(10,2) NOT NULL,
    id_alimentation INT,
-   FOREIGN KEY(id_alimentation) REFERENCES elevage_Alimentation(id_talimentation)
+   FOREIGN KEY(id_alimentation) REFERENCES elevage_Alimentation(id_alimentation)
 );
 
 
@@ -32,7 +33,7 @@ CREATE TABLE elevage_Stock (
    id_stock INTEGER AUTO_INCREMENT PRIMARY KEY,
    id_alimentation INT,
    quantite INT,
-   FOREIGN KEY (id_alimentation) REFERENCES elevage_Alimentation(id_alimentation); 
+   FOREIGN KEY (id_alimentation) REFERENCES elevage_Alimentation(id_alimentation) 
 );
 
 CREATE TABLE elevage_Argent (
@@ -41,10 +42,9 @@ CREATE TABLE elevage_Argent (
 
 
 CREATE TABLE elevage_Historique_Alimentaion(
-   id_historique INT,
+   id_historique INTEGER AUTO_INCREMENT PRIMARY KEY,
    id_animal INT,
    date_alimentation DATE NOT NULL,
    poids DECIMAL(10,2),
-   PRIMARY KEY(id_historique),
-   FOREIGN KEY(id_animal) REFERENCES Animal(id_animal)
+   FOREIGN KEY(id_animal) REFERENCES elevage_Animal(id_animal)
 );
