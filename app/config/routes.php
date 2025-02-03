@@ -3,6 +3,7 @@
 use app\controllers\LoginController;
 use app\controllers\ModifTypeController;
 use app\controllers\DepotController;
+use app\controllers\VenteController;
 use flight\Engine;
 use flight\net\Router;
 //use Flight;
@@ -10,6 +11,7 @@ use flight\net\Router;
 $Login_Controller = new LoginController();
 $Modif_Type_Controller = new ModifTypeController();
 $Depot_Controller = new DepotController();
+$Vente_Controller = new VenteController();
 
 $router->get('/', [$Login_Controller, 'loginUtilisateur']);
 $router->post('/connexion', [$Login_Controller, 'verifUtilisateur']);
@@ -34,3 +36,5 @@ $router->group('/type' , function () use ($router,$Modif_Type_Controller) {
 
 $router->get('/depot',[$Depot_Controller,'preDepot']);
 $router->post('/depot',[$Depot_Controller,'updateArgent']);
+
+$router->get('/animaux/liste/vente',[$Vente_Controller,'listAnimalsForSale']);

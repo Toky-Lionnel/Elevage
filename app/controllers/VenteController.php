@@ -11,9 +11,10 @@ class VenteController {
 
 	}
     public function listAnimalsForSale() {
-        $animals = Flight::AnimalModel()->getAnimalsForSale();
+        $animals = Flight::VenteModel()->getAnimalsForSale();
         Flight::render('animaux_en_vente', ['animals' => $animals]);
     }
+
 
 
 } 
