@@ -5,6 +5,7 @@ use app\controllers\ModifTypeController;
 use app\controllers\DepotController;
 use app\controllers\VenteController;
 use app\controllers\AnimauxController;
+use app\controllers\FoodController;
 
 use flight\Engine;
 use flight\net\Router;
@@ -15,6 +16,7 @@ $Modif_Type_Controller = new ModifTypeController();
 $Depot_Controller = new DepotController();
 $Vente_Controller = new VenteController();
 $Animaux_Controller = new AnimauxController();
+$Food_Controller = new FoodController();
 
 $router->get('/', [$Login_Controller, 'loginUtilisateur']);
 $router->post('/connexion', [$Login_Controller, 'verifUtilisateur']);
@@ -42,3 +44,5 @@ $router->get('/animaux/liste/vente',[$Vente_Controller,'listAnimalsForSale']);
 $router->get('/animaux/liste', [$Animaux_Controller, 'listerAnimaux']);
 
 $router->get('/animaux/achat/@id', [$Vente_Controller,'acheterAnimal']);
+
+$router->get('/liste/alimentation', [$Food_Controller, 'listAliments']);
