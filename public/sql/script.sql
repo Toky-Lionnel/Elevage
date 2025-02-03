@@ -21,7 +21,6 @@ CREATE TABLE elevage_Animal(
    id_animal INTEGER AUTO_INCREMENT PRIMARY KEY,
    id_type_animal INT,
    poids_initial DECIMAL(10,2) NOT NULL,
-   poids_actuel DECIMAL(10,2) NOT NULL,
    image_animal VARCHAR(255) NOT NULL,
    nom_animal VARCHAR(60),
    en_vente INT, -- 0 en vente | 1 pas en vente
