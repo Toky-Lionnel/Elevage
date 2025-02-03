@@ -62,12 +62,3 @@ INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (3, 3);
 INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (4, 40);
 INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (5, 5);
 
-UPDATE elevage_Alimentation
-SET gain = CASE 
-    WHEN nom_aliment = 'Maïs' THEN 5.00
-    WHEN nom_aliment = 'Soja' THEN 6.50
-    WHEN nom_aliment = 'Foin' THEN 2.50
-    WHEN nom_aliment = 'Granulés' THEN 7.00
-    WHEN nom_aliment = 'Herbe' THEN 3.00
-    ELSE gain
-END;

@@ -4,10 +4,6 @@ CREATE TABLE elevage_Alimentation(
    image_url VARCHAR(255) NOT NULL,
    gain DECIMAL(10,2) NOT NULL DEFAULT 0.00
 );
-ALTER TABLE elevage_Alimentation
-ADD COLUMN gain DECIMAL(10,2) NOT NULL DEFAULT 0.00;
-
-
 
 
 CREATE TABLE elevage_Type_Animal(
@@ -53,4 +49,7 @@ CREATE TABLE elevage_Historique_Alimentaion(
    poids DECIMAL(10,2),
    FOREIGN KEY(id_animal) REFERENCES elevage_Animal(id_animal)
 );
+<<<<<<< HEAD
 
+=======
+>>>>>>> 55bfd9fbbac75ca9faf9b7b8571d475e7aa22d28
