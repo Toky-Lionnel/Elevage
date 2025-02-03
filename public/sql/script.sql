@@ -49,7 +49,4 @@ CREATE TABLE elevage_Historique_Alimentaion(
    poids DECIMAL(10,2),
    FOREIGN KEY(id_animal) REFERENCES elevage_Animal(id_animal)
 );
-<<<<<<< HEAD
 
-=======
->>>>>>> 55bfd9fbbac75ca9faf9b7b8571d475e7aa22d28

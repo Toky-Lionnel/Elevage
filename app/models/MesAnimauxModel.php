@@ -87,6 +87,8 @@ class MesAnimauxModel
             $stmt->execute([$id_animal, $date_alimentation, $nouveau_poids]);
         }
     }
+
+    
     
     
 
