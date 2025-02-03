@@ -24,6 +24,7 @@
                         <td> <?= $type['nom_type'] ?></td>
                         <td> <?= $type['poids_min_vente'] ?> </td>
                         <td> <?= $type['prix_vente_kg'] ?> </td>
+                        <td> <?= $type['poids_maximal'] ?> </td>
                         <td> <?= $type['nb_jour_sans_manger'] ?> </td>
                         <td> <?= $type['perte_poids'] ?> </td>
                         <td> <?= $type['nom_aliment'] ?> </td>
