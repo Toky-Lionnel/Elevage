@@ -4,8 +4,7 @@ use flight\Engine;
 use flight\database\PdoWrapper;
 use flight\debug\database\PdoQueryCapture;
 use Tracy\Debugger;
-use app\models\LoginModel;
-
+use app\models\ModifTypeModel;
 
 /** 
  * @var array $config This comes from the returned array at the bottom of the config.php file
@@ -32,7 +31,7 @@ use app\models\LoginModel;
 
 
 
-Flight::map('LoginModel', function() {
-    return new LoginModel(Flight::db());  
+Flight::map('ModifTypeModel', function() {
+    return new ModifTypeModel(Flight::db());  
 });
 

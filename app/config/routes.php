@@ -21,3 +21,10 @@ $router->get('/template', [$Login_Controller, 'prepaAjoutThe']);
 
 
 
+$router->group('/type' , function () use ($router,$Gestion_Parcelle_Controller) {
+
+	$router->get('/liste',[$Gestion_Parcelle_Controller,'listeParcelle']);
+
+    
+});
+
