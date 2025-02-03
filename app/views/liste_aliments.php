@@ -15,9 +15,21 @@
         <div class="menu-container col-md-3">
             <?php include("menu.php"); ?>
         </div>
-        
+
         <!-- CONTENU PRINCIPAL À DROITE -->
         <div class="container mt-5 col-md-9">
+            <?php if (isset($_GET['error'])): ?>
+                <div class="alert alert-danger">
+                    <?php
+                    if ($_GET['error'] == 'argent_insuffisant') {
+                        echo "Vous n'avez pas assez d'argent pour effectuer cet achat.";
+                    } elseif ($_GET['error'] == 'quantite_invalide') {
+                        echo "Veuillez sélectionner une quantité valide.";
+                    }
+                    ?>
+                </div>
+            <?php endif; ?>
+
             <h2 class="text-center mb-4">Achat nourritures</h2>
             <div class="row">
                 <?php if (!empty($aliments)): ?>
@@ -25,19 +37,24 @@
                         <div class="col-md-4">
                             <div class="card mb-4">
                                 <img src="<?= htmlspecialchars($aliment['image_url']) ?>" class="card-img-top"
-                                     alt="Image de <?= htmlspecialchars($aliment['nom_aliment']) ?>">
+                                    alt="Image de <?= htmlspecialchars($aliment['nom_aliment']) ?>">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= htmlspecialchars($aliment['nom_aliment']) ?: 'Nom inconnu' ?></h5>
+                                    <h5 class="card-title"><?= htmlspecialchars($aliment['nom_aliment']) ?: 'Nom inconnu' ?>
+                                    </h5>
                                     <p class="card-text">Gain : <?= htmlspecialchars($aliment['gain']) ?> %</p>
-                                    
+
                                     <!-- Conteneur pour les boutons de quantité -->
                                     <div class="d-flex align-items-center mb-3">
-                                        <button class="btn btn-secondary" onclick="adjustQuantity(<?= $aliment['id_alimentation'] ?>, -1)">-</button>
-                                        <input type="number" id="quantity-<?= $aliment['id_alimentation'] ?>" value="0" min="0" class="form-control mx-2" style="width: 60px;" readonly>
-                                        <button class="btn btn-secondary" onclick="adjustQuantity(<?= $aliment['id_alimentation'] ?>, 1)">+</button>
+                                        <button class="btn btn-secondary"
+                                            onclick="adjustQuantity(<?= $aliment['id_alimentation'] ?>, -1)">-</button>
+                                        <input type="number" id="quantity-<?= $aliment['id_alimentation'] ?>" value="0" min="0"
+                                            class="form-control mx-2" style="width: 60px;" readonly>
+                                        <button class="btn btn-secondary"
+                                            onclick="adjustQuantity(<?= $aliment['id_alimentation'] ?>, 1)">+</button>
                                     </div>
-                                    
-                                    <a href="<?= constant('BASE_URL') ?>aliments/achat/<?= $aliment['id_alimentation'] ?>?quantity=0" class="btn btn-primary" id="buy-button-<?= $aliment['id_alimentation'] ?>">Acheter</a>
+
+                                    <a href="<?= constant('BASE_URL') ?>aliments/achat/<?= $aliment['id_alimentation'] ?>?quantity=0"
+                                        class="btn btn-primary" id="buy-button-<?= $aliment['id_alimentation'] ?>">Acheter</a>
                                 </div>
                             </div>
                         </div>
