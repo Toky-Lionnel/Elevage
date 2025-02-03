@@ -37,6 +37,12 @@
           </a>
         </li>
 
+        <li class="menu-item">
+          <a href="<?= constant('BASE_URL')?>animaux/liste" class="menu-link">
+            <div data-i18n="Without menu"> Les Animaux achetés </div>
+          </a>
+        </li>
+
 
       </ul>
     </li>
