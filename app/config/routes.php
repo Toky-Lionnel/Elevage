@@ -3,7 +3,12 @@
 use app\controllers\LoginController;
 use app\controllers\ModifTypeController;
 use app\controllers\DepotController;
+<<<<<<< HEAD
 use app\controllers\VenteController;
+=======
+use app\controllers\AnimauxController;
+
+>>>>>>> c22cb3dc7a1b5e359f6e5e702e4dbf673f449e2e
 use flight\Engine;
 use flight\net\Router;
 //use Flight;
@@ -11,7 +16,11 @@ use flight\net\Router;
 $Login_Controller = new LoginController();
 $Modif_Type_Controller = new ModifTypeController();
 $Depot_Controller = new DepotController();
+<<<<<<< HEAD
 $Vente_Controller = new VenteController();
+=======
+$Animaux_Controller = new AnimauxController();
+>>>>>>> c22cb3dc7a1b5e359f6e5e702e4dbf673f449e2e
 
 $router->get('/', [$Login_Controller, 'loginUtilisateur']);
 $router->post('/connexion', [$Login_Controller, 'verifUtilisateur']);
@@ -20,21 +29,23 @@ $router->post('/inscription', [$Login_Controller, 'insertUtilisateur']);
 $router->get('/admin/login', [$Login_Controller, 'loginAdmin']);
 $router->post('/admin/login', [$Login_Controller, 'verifAdmin']);
 
-
 $router->get('/accueil', [$Login_Controller, 'accueilAdmin']);
 $router->get('/template', [$Login_Controller, 'prepaAjoutThe']);
 
-
-
-$router->group('/type' , function () use ($router,$Modif_Type_Controller) {
-
-	$router->get('/liste',[$Modif_Type_Controller,'listeTypeAnimal']);
-    $router->get('/modifier/@id_type:[0-9]+',[$Modif_Type_Controller , 'prepaModifType']);
-    $router->post('/modifier/@id_type:[0-9]+',[$Modif_Type_Controller , 'modificationType']);
+$router->group('/type' , function () use ($router, $Modif_Type_Controller) {
+    $router->get('/liste', [$Modif_Type_Controller, 'listeTypeAnimal']);
+    $router->get('/modifier/@id_type:[0-9]+', [$Modif_Type_Controller, 'prepaModifType']);
+    $router->post('/modifier/@id_type:[0-9]+', [$Modif_Type_Controller, 'modificationType']);
 });
 
+$router->get('/depot', [$Depot_Controller, 'preDepot']);
+$router->post('/depot', [$Depot_Controller, 'updateArgent']);
 
+<<<<<<< HEAD
 $router->get('/depot',[$Depot_Controller,'preDepot']);
 $router->post('/depot',[$Depot_Controller,'updateArgent']);
 
 $router->get('/animaux/liste/vente',[$Vente_Controller,'listAnimalsForSale']);
+=======
+$router->get('/animaux/liste', [$Animaux_Controller, 'listerAnimaux']);
+>>>>>>> c22cb3dc7a1b5e359f6e5e702e4dbf673f449e2e
