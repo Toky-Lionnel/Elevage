@@ -18,4 +18,19 @@ class AnimauxController {
         $data = ['page' => 'liste_animaux', 'nom' => 'Liste des Animaux', 'animaux' => $animaux];
         Flight::render('template_animaux', $data);
     }
+
+    public function nourrirAnimal($idAnimal){
+        if (!isset($_POST['dateAlimentation'])) {
+            // Gérer l'erreur si la date n'est pas envoyée
+            die("Date d'alimentation requise.");
+        }
+        $date_alimentation = $_POST['dateAlimentation'];
+        $idAliment = Flight::MesAnimauxModel()->getAlimentId($idAnimal);
+        $stock = Flight::MesAnimauxModel()->verifierStockAliment($idAliment);
+        if($stock == true){
+            Flight::MesAnimauxModel()->updatequantite($idAliment);
+            Flight::insertHistoriqueAlimentation($idAnimal, $date_alimentation);
+        }
+        Flight::redirect(constant('BASE_URL').'animaux/liste');
+    }
 }
