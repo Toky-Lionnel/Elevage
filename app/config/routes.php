@@ -3,7 +3,15 @@
 use app\controllers\LoginController;
 use app\controllers\ModifTypeController;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 use app\controllers\DepotController;
+=======
+use app\controllers\AnimauxController;
+>>>>>>> Stashed changes
+=======
+use app\controllers\AnimauxController;
+>>>>>>> Stashed changes
 =======
 use app\controllers\AnimauxController;
 >>>>>>> Stashed changes
@@ -37,8 +45,18 @@ $router->group('/type' , function () use ($router,$Modif_Type_Controller) {
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 $router->get('/depot',[$Depot_Controller,'preDepot']);
 $router->post('/depot',[$Depot_Controller,'updateArgent']);
+=======
+$Animaux_Controller = new AnimauxController();
+$router ->get('/animaux/liste',[$Animaux_Controller,'listerAnimaux']);
+>>>>>>> Stashed changes
+=======
+$Animaux_Controller = new AnimauxController();
+$router ->get('/animaux/liste',[$Animaux_Controller,'listerAnimaux']);
+>>>>>>> Stashed changes
 =======
 $Animaux_Controller = new AnimauxController();
 $router ->get('/animaux/liste',[$Animaux_Controller,'listerAnimaux']);

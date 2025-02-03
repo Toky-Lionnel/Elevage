@@ -6,8 +6,16 @@ use flight\debug\database\PdoQueryCapture;
 use Tracy\Debugger;
 use app\models\ModifTypeModel;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 use app\models\DepotModel;
 use app\models\VenteModel;
+=======
+use app\models\MesAnimauxModel;
+>>>>>>> Stashed changes
+=======
+use app\models\MesAnimauxModel;
+>>>>>>> Stashed changes
 =======
 use app\models\MesAnimauxModel;
 >>>>>>> Stashed changes
@@ -42,6 +50,8 @@ Flight::map('ModifTypeModel', function() {
 });
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Flight::map('DepotModel', function() {
     return new DepotModel(Flight::db());  
 });
@@ -50,8 +60,18 @@ Flight::map('VenteModel', function() {
     return new VenteModel(Flight::db());  
 });
 =======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 Flight::map('MesAnimauxModel', function() {
     return new MesAnimauxModel(Flight::db());  
 });
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
