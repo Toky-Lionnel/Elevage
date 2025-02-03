@@ -6,7 +6,7 @@ use Tracy\Debugger;
 // Set the default timezone
 date_default_timezone_set('America/New_York');
 
-define('BASE_URL','https://localhost/Prepa%20Exam/cool-project-name%20(copie)/');
+define('BASE_URL','http://localhost/Projet%20Final/Elevage/');
 
 
 // Set the error reporting level
