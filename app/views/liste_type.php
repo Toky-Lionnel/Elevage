@@ -1,6 +1,6 @@
 <!-- Striped Rows -->
 <div class="card mt-5">
-    <h5 class="card-header">Striped rows</h5>
+    <h5 class="card-header"> Liste Type Animal </h5>
     <div class="table-responsive text-nowrap">
         <table class="table table-striped">
             <thead>

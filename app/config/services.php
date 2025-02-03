@@ -5,6 +5,7 @@ use flight\database\PdoWrapper;
 use flight\debug\database\PdoQueryCapture;
 use Tracy\Debugger;
 use app\models\ModifTypeModel;
+use app\models\DepotModel;
 
 /** 
  * @var array $config This comes from the returned array at the bottom of the config.php file
@@ -33,5 +34,9 @@ use app\models\ModifTypeModel;
 
 Flight::map('ModifTypeModel', function() {
     return new ModifTypeModel(Flight::db());  
+});
+
+Flight::map('DepotModel', function() {
+    return new DepotModel(Flight::db());  
 });
 
