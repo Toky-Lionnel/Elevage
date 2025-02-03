@@ -72,4 +72,7 @@ INSERT INTO gain (id_type_animal, pourcentage) VALUES
 (4, 8.00),  -- Cochon
 (5, 18.00); -- Lapin
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
