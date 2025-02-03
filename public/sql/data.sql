@@ -34,9 +34,24 @@ VALUES
 (4, 51.0, 'cochon2.jpg', 'Cochon B', 0),
 (4, 52.0, 'cochon3.jpg', 'Cochon C', 1),
 (4, 53.0, 'cochon4.jpg', 'Cochon D', 0),
-(4, 54.0, 'cochon5.jpg', 'Cochon E', 0);
+(4, 54.0, 'cochon5.jpg', 'Cochon E', 0),
 (5, 2.0, 'lapin1.jpg', 'Lapin A', 0),
 (5, 2.2, 'lapin2.jpg', 'Lapin B', 0),
 (5, 2.4, 'lapin3.jpg', 'Lapin C', 1),
 (5, 2.6, 'lapin4.jpg', 'Lapin D', 0),
-(5, 2.8, 'lapin5.jpg', 'Lapin E', 0);
+(5, 2.8, 'lapin5.jpg', 'Lapin E', 0)
+
+
+INSERT INTO elevage_Historique_Alimentaion (id_animal, date_alimentation, poids) VALUES
+(1, '2025-01-28', 2.5),
+(1, '2025-02-01', 2.6),
+(2, '2025-01-25', 300.0),
+(2, '2025-01-30', 305.5),
+(3, '2025-01-26', 40.2),
+(3, '2025-02-02', 41.0),
+(4, '2025-01-29', 100.0),
+(5, '2025-01-27', 4.2),
+(5, '2025-02-03', 4.3);
+
+
+INSERT INTO elevage_Argent(argent) VALUES(0);
