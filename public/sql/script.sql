@@ -2,6 +2,10 @@ CREATE TABLE elevage_Alimentation(
    id_alimentation INTEGER AUTO_INCREMENT PRIMARY KEY,
    nom_aliment VARCHAR(50) NOT NULL
 );
+ALTER TABLE elevage_Alimentation
+ADD COLUMN gain DECIMAL(10,2) NOT NULL DEFAULT 0.00;
+
+
 
 
 CREATE TABLE elevage_Type_Animal(
