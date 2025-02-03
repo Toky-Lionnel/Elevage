@@ -22,6 +22,15 @@ class LoginController {
         Flight::render('template_login',$data);
     }
 
+    public function accueilAdmin() {
+        $data = ['page' => 'admin_panel','accueil' => 'true'];
+        Flight::render('template_the',$data);
+    }
+
+    public function prepaAjoutThe() {
+        $data = ['page' => 'ajout_the','navigation' => 'The','liste' => 'liste_the','ajout' => 'ajout_the', 'configuration' => 'config_the'];
+        Flight::render('template_the',$data);
+    }
 
     public function inscription () {
         $data = ['page' => 'inscription', 'nom' => 'Inscription'];

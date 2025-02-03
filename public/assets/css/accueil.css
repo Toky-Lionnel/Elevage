@@ -1,0 +1,35 @@
+.nav-pills .nav-link {
+    border-radius: 25px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}
+
+
+.nav-pills .nav-link.active {
+    background-color:#5f61e6;
+    /* Couleur personnalisée pour l'élément actif */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+    /* Ombre douce */
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #5f61e6;
+    /* Couleur au survol */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 86, 179, 0.2);
+}
+
+.nav-pills .nav-item {
+    margin-right: 10px;
+    /* Espacement entre les éléments */
+}
+
+.image-liste {
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}

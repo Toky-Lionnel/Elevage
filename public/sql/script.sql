@@ -10,11 +10,6 @@ CREATE TABLE elevage_Alimentation(
    FOREIGN KEY(id_type_alimentation) REFERENCES elevage_Type_Alimentation(id_type_alimentation)
 );
 
-CREATE TABLE elevage_Utilisateur(
-   id_utilisateur INTEGER AUTO_INCREMENT PRIMARY KEY,
-   nom_utilisateur VARCHAR(50) NOT NULL,
-   argent DECIMAL(10,2)
-);
 
 CREATE TABLE elevage_Type_Animal(
    id_type_animal INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -27,19 +22,19 @@ CREATE TABLE elevage_Type_Animal(
    FOREIGN KEY(id_type_alimentation) REFERENCES elevage_Type_Alimentation(id_type_alimentation)
 );
 
+
 CREATE TABLE elevage_Animal(
    id_animal INTEGER AUTO_INCREMENT PRIMARY KEY,
-   id_utilisateur INT,
    id_type_animal INT,
    poids DECIMAL(10,2) NOT NULL,
    image_animal VARCHAR(255) NOT NULL,
    nom_animal VARCHAR(60),
-   FOREIGN KEY(id_utilisateur) REFERENCES elevage_Utilisateur(id_utilisateur),
+   en_ventre INT, -- 0 en vente | 1 pas en vente
    FOREIGN KEY(id_type_animal) REFERENCES elevage_Type_Animal(id_type_animal)
 );
 
 
-CREATE TABLE elevage_Admin (
-   pseudo VARCHAR(50),
-   motdepasse VARCHAR(50)
+CREATE TABLE elevage_Argent (
+   argent DECIMAL(10,2)
 );
+

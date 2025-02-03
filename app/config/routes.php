@@ -14,3 +14,10 @@ $router->get('/inscription', [$Login_Controller, 'inscription']);
 $router->post('/inscription', [$Login_Controller, 'insertUtilisateur']);
 $router->get('/admin/login', [$Login_Controller, 'loginAdmin']);
 $router->post('/admin/login', [$Login_Controller, 'verifAdmin']);
+
+
+$router->get('/accueil', [$Login_Controller, 'accueilAdmin']);
+$router->get('/template', [$Login_Controller, 'prepaAjoutThe']);
+
+
+
