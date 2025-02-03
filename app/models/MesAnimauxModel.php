@@ -17,13 +17,11 @@ class MesAnimauxModel
         $this->db = $db;
     }
 
-    public function verifLoginAdmin()
-    {
-
-        $stmt = $this->db->prepare("SELECT * FROM elevage_Animal WHERE en_vente = 1");
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-        return $result;
+    public function ListerAnimaux() {
+        $stmt = $this->db->prepare("SELECT id_animal, id_type_animal, poids_initial, image_animal, nom_animal FROM elevage_Animal WHERE en_vente = 1");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 
 }
