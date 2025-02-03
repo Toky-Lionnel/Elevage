@@ -31,6 +31,13 @@
           </a>
         </li>
 
+        <li class="menu-item">
+          <a href="<?= constant('BASE_URL')?>depot" class="menu-link">
+            <div data-i18n="Without menu"> Depot d'argent </div>
+          </a>
+        </li>
+
+
       </ul>
     </li>
 
