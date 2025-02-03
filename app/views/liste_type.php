@@ -1,5 +1,5 @@
 <!-- Striped Rows -->
-<div class="card">
+<div class="card mt-5">
     <h5 class="card-header">Striped rows</h5>
     <div class="table-responsive text-nowrap">
         <table class="table table-striped">
