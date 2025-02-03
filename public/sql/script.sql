@@ -24,7 +24,7 @@ CREATE TABLE elevage_Type_Animal(
    nb_jour_sans_manger INT,
    perte_poids DECIMAL(10,2) NOT NULL,
    id_type_alimentation INT,
-   FOREIGN KEY(id_type_alimentation) REFERENCES elevage_Type_Alimentation(id_type_alimentation),
+   FOREIGN KEY(id_type_alimentation) REFERENCES elevage_Type_Alimentation(id_type_alimentation)
 );
 
 CREATE TABLE elevage_Animal(
@@ -36,4 +36,10 @@ CREATE TABLE elevage_Animal(
    nom_animal VARCHAR(60),
    FOREIGN KEY(id_utilisateur) REFERENCES elevage_Utilisateur(id_utilisateur),
    FOREIGN KEY(id_type_animal) REFERENCES elevage_Type_Animal(id_type_animal)
+);
+
+
+CREATE TABLE elevage_Admin (
+   pseudo VARCHAR(50),
+   motdepasse VARCHAR(50)
 );
