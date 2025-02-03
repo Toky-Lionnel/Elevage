@@ -11,3 +11,32 @@ INSERT INTO elevage_Type_Animal (nom_type, poids_min_vente, poids_maximal, prix_
 ('Mouton', 30.00, 80.00, 6.00, 4, 2.00, 3),
 ('Cochon', 50.00, 150.00, 5.50, 4, 5.00, 4),
 ('Lapin', 2.00, 5.00, 7.00, 2, 0.20, 5);
+
+-- Inserting data into elevage_Animal
+INSERT INTO elevage_Animal (id_type_animal, poids_initial, image_animal, nom_animal, en_vente)
+VALUES 
+(1, 1.5, 'poulet1.jpg', 'Poulet A', 0),
+(1, 1.6, 'poulet2.jpg', 'Poulet B', 0),
+(1, 1.7, 'poulet3.jpg', 'Poulet C', 1),
+(1, 1.8, 'poulet4.jpg', 'Poulet D', 0),
+(1, 1.9, 'poulet5.jpg', 'Poulet E', 0),
+(2, 2.0, 'boeuf1.jpg', 'Bœuf A', 0),
+(2, 2.1, 'boeuf2.jpg', 'Bœuf B', 0),
+(2, 2.2, 'boeuf3.jpg', 'Bœuf C', 1),
+(2, 2.3, 'boeuf4.jpg', 'Bœuf D', 0),
+(2, 2.4, 'boeuf5.jpg', 'Bœuf E', 0),
+(3, 30.0, 'mouton1.jpg', 'Mouton A', 0),
+(3, 31.0, 'mouton2.jpg', 'Mouton B', 0),
+(3, 32.0, 'mouton3.jpg', 'Mouton C', 1),
+(3, 33.0, 'mouton4.jpg', 'Mouton D', 0),
+(3, 34.0, 'mouton5.jpg', 'Mouton E', 0),
+(4, 50.0, 'cochon1.jpg', 'Cochon A', 0),
+(4, 51.0, 'cochon2.jpg', 'Cochon B', 0),
+(4, 52.0, 'cochon3.jpg', 'Cochon C', 1),
+(4, 53.0, 'cochon4.jpg', 'Cochon D', 0),
+(4, 54.0, 'cochon5.jpg', 'Cochon E', 0);
+(5, 2.0, 'lapin1.jpg', 'Lapin A', 0),
+(5, 2.2, 'lapin2.jpg', 'Lapin B', 0),
+(5, 2.4, 'lapin3.jpg', 'Lapin C', 1),
+(5, 2.6, 'lapin4.jpg', 'Lapin D', 0),
+(5, 2.8, 'lapin5.jpg', 'Lapin E', 0);
