@@ -25,6 +25,7 @@ class PrevisionModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // ity zavatra ity mila ampiana ilay resaka date_mort
     public function getAnimauxParType($id_type_animal)
     {
         $stmt = $this->db->prepare("SELECT * FROM elevage_Animal An JOIN elevage_Type_Animal Ta ON An.id_type_animal = Ta.id_type_animal 
@@ -60,8 +61,6 @@ class PrevisionModel
     }
 
 
-
-
     public function verifPoidsMax($poids_actuel, $poids_max)
     {
         if ($poids_max < $poids_actuel) {
@@ -71,6 +70,7 @@ class PrevisionModel
     }
 
 
+
     public function alimenterAnimaux($date_debut, $date_fin)
     {
         $types_animaux = $this->getTypesAnimaux();
@@ -78,121 +78,140 @@ class PrevisionModel
         $situation_stocks = [];
 
         foreach ($types_animaux as $type) {
-            $stock_info = $this->getStockDisponible($type['id_alimentation']);
+
+            $stock_info = $this->getStockInfo($type['id_alimentation']);
             $stock_disponible = $stock_info['quantite'];
+            $stock_initial = $stock_disponible;
+            $stock_vidé = null;
+            $nom_aliment = $stock_info['nom_aliment'];
+            $gain = $stock_info['gain'];
+            $jours_max_sans_manger = $type['nb_jour_sans_manger'];
+            $perte_poids = $type['perte_poids'];
+
             $animaux = $this->getAnimauxParType($type['id_type_animal']);
+            $dates_animaux = $this->getDernieresDatesAlimentation($type['id_type_animal']);
 
-            $resultat = $this->simulerAlimentation($animaux, $type, $stock_disponible, $date_debut, $date_fin);
+            $this->simulerAlimentation($animaux, $dates_animaux, $stock_disponible, $date_debut, $date_fin, $gain, $perte_poids, $jours_max_sans_manger, $stock_vidé);
 
-            $situation_animaux = array_merge($situation_animaux, $resultat['animaux']);
-            $situation_stocks[] = [
-                'nom_aliment' => $stock_info['nom_aliment'],
-                'type_animal' => $type['nom_type'],
-                'stock_initial' => $stock_info['quantite'],
-                'stock_final' => $resultat['stock_disponible'],
-                'stock_vidé_le' => $resultat['stock_vidé'] ?? "Non vidé",
-                'animaux_nourris' => $resultat['animaux_nourris']
-            ];
-        }
-
-        return ['animaux' => $situation_animaux, 'stocks' => $situation_stocks];
-    }
-
-    private function simulerAlimentation($animaux, $type, &$stock_disponible, $date_debut, $date_fin)
-    {
-        $dates_animaux = $this->initialiserDatesRepas($animaux, $date_debut);
-        $nb_animaux_nourris = 0;
-        $stock_vidé = null;
-
-        for ($jour = strtotime($date_debut); $jour <= strtotime($date_fin); $jour += 86400) {
-            $date_actuelle = date('Y-m-d', $jour);
-            usort($animaux, [$this, 'trierAnimauxParProximiteVente']);
-
-            foreach ($animaux as &$animal) {
-                $this->traiterAnimal($animal, $type, $dates_animaux, $stock_disponible, $date_actuelle, $nb_animaux_nourris, $stock_vidé);
-            }
-            unset($animal);
+            $situation_animaux = array_merge($situation_animaux, $this->genererSituationAnimaux($animaux, $dates_animaux, $type, $date_fin, $jours_max_sans_manger));
+            $situation_stocks[] = $this->genererSituationStock($nom_aliment, $stock_initial, $stock_disponible, $stock_vidé);
         }
 
         return [
-            'animaux' => $this->genererSituationAnimaux($animaux, $type, $dates_animaux, $date_fin),
-            'stock_disponible' => $stock_disponible,
-            'stock_vidé' => $stock_vidé,
-            'animaux_nourris' => $nb_animaux_nourris
+            'animaux' => $situation_animaux,
+            'stocks' => $situation_stocks
         ];
     }
 
-    private function initialiserDatesRepas($animaux, $date_debut)
+
+    private function getStockInfo($id_alimentation)
     {
+        $stmt = $this->db->prepare("SELECT nom_aliment, gain, quantite FROM elevage_Alimentation 
+                                    JOIN elevage_Stock ON elevage_Alimentation.id_alimentation = elevage_Stock.id_alimentation
+                                    WHERE elevage_Alimentation.id_alimentation = ?");
+        $stmt->execute([$id_alimentation]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+    private function getDernieresDatesAlimentation($type)
+    {
+        $animaux = $this->getAnimauxParType($type);
         $dates_animaux = [];
+
         foreach ($animaux as $animal) {
-            $dates_animaux[$animal['id_animal']] = $date_debut;
+            $dates_animaux[$animal['id_animal']] = date('Y-m-d');
         }
+
         return $dates_animaux;
     }
 
-    private function trierAnimauxParProximiteVente($animal1, $animal2)
+    private function simulerAlimentation(&$animaux, &$dates_animaux, &$stock_disponible, $date_debut, $date_fin, $gain, $perte_poids, $jours_max_sans_manger, &$stock_vidé)
     {
-        return abs($animal1['poids_initial'] - $animal1['poids_min_vente']) <=> abs($animal2['poids_initial'] - $animal2['poids_min_vente']);
-    }
+        for ($jour = strtotime($date_debut); $jour <= strtotime($date_fin); $jour += 86400) {
+            $date_actuelle = date('Y-m-d', $jour);
 
-    
-    private function traiterAnimal(&$animal, $type, &$dates_animaux, &$stock_disponible, $date_actuelle, &$nb_animaux_nourris, &$stock_vidé)
-{
-    $dernier_repas = $dates_animaux[$animal['id_animal']];
-    $jours_sans_manger = (strtotime($date_actuelle) - strtotime($dernier_repas)) / 86400;
+            usort($animaux, function ($a, $b) {
+                return ($a['poids_initial'] < $a['poids_min_vente']) - ($b['poids_initial'] < $b['poids_min_vente']);
+            });
 
-    if ($jours_sans_manger > $type['nb_jour_sans_manger']) {
-        $animal['statut'] = "Mort";
-        return;
-    }
+            foreach ($animaux as &$animal) {
+                // Vérifier si l'animal est déjà mort
+                if (isset($animal['statut']) && $animal['statut'] === "Mort") {
+                    continue;
+                }
 
-    if ($animal['auto_vente'] == 1 && $animal['poids_initial'] >= $type['poids_min_vente']) {
-        $animal['statut'] = "Vente";
-        return;
-    }
+                $dernier_repas = $dates_animaux[$animal['id_animal']] ?? $date_debut;
+                $jours_sans_manger = (strtotime($date_actuelle) - strtotime($dernier_repas)) / 86400;
 
-    // Suppression de la vérification de la date du dernier repas
-    // pour permettre de nourrir plusieurs animaux le même jour
+                // Vérifier si l'animal est mort à cause du manque de nourriture
+                if ($jours_sans_manger > $jours_max_sans_manger) {
+                    $animal['statut'] = "Mort le " . $date_actuelle;
+                    continue;
+                } else {
+                    $animal['statut'] = "Vivant";
+                }
 
-    if ($stock_disponible >= $type['quota']) {
-        $animal['poids_initial'] += $type['gain'];
-        $stock_disponible -= $type['quota'];
-        $dates_animaux[$animal['id_animal']] = $date_actuelle; // Mise à jour de la date du dernier repas
+                // Nourrir l'animal seulement si le stock est suffisant
+                if ($stock_disponible >= $animal['quota']) {
+                    if ($animal['poids_initial'] < $animal['poids_maximal']) {
+                        $nouveau_poids = $animal['poids_initial'] + ($animal['poids_initial'] * ($gain / 100));
+                        $animal['poids_initial'] = min($nouveau_poids, $animal['poids_maximal']);
+                    }
 
-        if (!isset($animal['déjà_nourri'])) {
-            $nb_animaux_nourris++;
-            $animal['déjà_nourri'] = true;
+                    $stock_disponible -= $animal['quota'];
+                    $dates_animaux[$animal['id_animal']] = $date_actuelle;
+                } else {
+                    // Si le stock est insuffisant, l'animal perd du poids
+                    $animal['poids_initial'] -= ($animal['poids_initial'] * ($perte_poids / 100));
+
+                    // Marquer la date à laquelle le stock a été vidé
+                    if ($stock_vidé === null) {
+                        $stock_vidé = $date_actuelle;
+                    }
+                }
+            }
         }
-    } else {
-        $animal['poids_initial'] -= ($animal['poids_initial'] * ($type['perte_poids'] / 100));
-        if ($stock_vidé === null) {
-            $stock_vidé = $date_actuelle;
-        }
     }
-}
 
-    private function genererSituationAnimaux($animaux, $type, $dates_animaux, $date_fin)
+
+    private function genererSituationAnimaux($animaux, $dates_animaux, $type, $date_fin, $jours_max_sans_manger)
     {
-        $situation_animaux = [];
+        $result = [];
+
         foreach ($animaux as $animal) {
-            $dernier_repas = $dates_animaux[$animal['id_animal']];
+            $dernier_repas = $dates_animaux[$animal['id_animal']] ?? "Jamais nourri";
             $jours_sans_manger = (strtotime($date_fin) - strtotime($dernier_repas)) / 86400;
-            $statut = ($jours_sans_manger > $type['nb_jour_sans_manger']) ? "Mort" : ($animal['statut'] ?? "Vivant");
 
-            $situation_animaux[] = [
+            $statut = $animal['statut'];
+
+            $result[] = [
                 'id_animal' => $animal['id_animal'],
                 'animal' => $animal['nom_animal'],
                 'image' => $animal['image_animal'],
+                'auto_vente' => $animal['auto_vente'],
+                'en_vente' => $animal['en_vente'],
+                'date_vente' => $animal['date_vente'] ?? null, // Display the sale date
                 'poids_final' => $this->verifPoidsMax($animal['poids_initial'], $animal['poids_maximal']),
                 'poids_max' => $animal['poids_maximal'],
                 'type_animal' => $type['nom_type'],
                 'quota' => $type['quota'],
                 'dernier_repas' => $dernier_repas,
                 'nombre_sans_manger' => $jours_sans_manger,
-                'statut' => $statut
+                'statut' => $statut,
             ];
         }
-        return $situation_animaux;
+
+        return $result;
+    }
+
+    private function genererSituationStock($nom_aliment, $stock_initial, $stock_final, $stock_vidé)
+    {
+        return [
+            'nom_aliment' => $nom_aliment,
+            'stock_initial' => $stock_initial,
+            'stock_final' => $stock_final,
+            'stock_vidé_le' => $stock_vidé ?? "Non vidé"
+        ];
     }
 }

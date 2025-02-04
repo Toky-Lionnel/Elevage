@@ -37,7 +37,7 @@ CREATE TABLE elevage_Animal(
 CREATE TABLE elevage_Stock (
    id_stock INTEGER AUTO_INCREMENT PRIMARY KEY,
    id_alimentation INT,
-   quantite INT,
+   quantite DECIMAL(10,2),
    FOREIGN KEY (id_alimentation) REFERENCES elevage_Alimentation(id_alimentation) 
 );
 
