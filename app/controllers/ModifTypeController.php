@@ -40,7 +40,7 @@ class ModifTypeController {
         $nom = $data->nom;
         $poids_min = $data->poids_min;
         $prix = $data->prix_vente;
-        $poids_maxFlight::redirect(constant('BASE_URL').'type/liste'); = $data->poids_max;
+        $poids_max = $data->poids_max;
         $nb_jour = $data->nb_jour;
         $perte = $data->perte_poids;
         $alim = $data->alimentation;

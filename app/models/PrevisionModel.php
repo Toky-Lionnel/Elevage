@@ -58,6 +58,7 @@ class PrevisionModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    
     public function alimenterAnimaux($date_debut, $date_fin)
     {
         $types_animaux = $this->getTypesAnimaux();
@@ -65,6 +66,7 @@ class PrevisionModel
         $situation_stocks = [];
     
         foreach ($types_animaux as $type) {
+
             // Récupérer les infos de l'alimentation et du stock
             $stock_info = $this->getStockDisponible($type['id_alimentation']);
             $stock_disponible = $stock_info['quantite'];
