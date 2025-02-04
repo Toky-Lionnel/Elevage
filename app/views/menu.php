@@ -26,15 +26,14 @@
 
       <ul class="menu-sub">
         <li class="menu-item">
-<<<<<<< Updated upstream
+
           <a href="<?= constant('BASE_URL') ?>reset" class="menu-link">
             <div data-i18n="Without menu"> Reset </div>
           </a>
         </li>
 
         <li class="menu-item">
-=======
->>>>>>> Stashed changes
+
           <a href="<?= constant('BASE_URL')?>type/liste" class="menu-link">
             <div data-i18n="Without menu">Modification Type Animal </div>
           </a>
