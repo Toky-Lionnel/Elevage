@@ -19,15 +19,16 @@ class PrevisionModel
 
     public function getTypesAnimaux()
     {
-        $stmt = $this->db->prepare("SELECT * FROM elevage_Type_Animal");
+        $stmt = $this->db->prepare("SELECT * FROM elevage_Type_Animal TA JOIN elevage_Alimentation Al ON 
+        TA.id_alimentation = Al.id_alimentation");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAnimauxParType($id_type_animal)
     {
-        $stmt = $this->db->prepare("SELECT * FROM elevage_Animal An JOIN elevage_Type_Animal Ta ON An.id_type_animal = Ta.id_type_animal
-          WHERE An.id_type_animal = ? AND en_vente = 1");
+        $stmt = $this->db->prepare("SELECT * FROM elevage_Animal An JOIN elevage_Type_Animal Ta ON An.id_type_animal = Ta.id_type_animal 
+        JOIN elevage_Alimentation Al ON Ta.id_alimentation=Al.id_alimentation WHERE An.id_type_animal = ? AND en_vente = 1");
         $stmt->execute([$id_type_animal]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -58,110 +59,6 @@ class PrevisionModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    
-    public function alimenterAnimaux($date_debut, $date_fin)
-    {
-        $types_animaux = $this->getTypesAnimaux();
-        $situation_animaux = [];
-        $situation_stocks = [];
-    
-        foreach ($types_animaux as $type) {
-
-            // Récupérer les infos de l'alimentation et du stock
-            $stock_info = $this->getStockDisponible($type['id_alimentation']);
-            $stock_disponible = $stock_info['quantite'];
-            $stock_animaux = $stock_info['nom_type'];
-            $stock_initial = $stock_disponible;
-            $stock_vidé = null;
-            $nom_aliment = $stock_info['nom_aliment'];
-            $gain = $stock_info['gain'];
-            $jours_max_sans_manger = $type['nb_jour_sans_manger'];
-            $perte_poids = $type['perte_poids'];
-    
-            $animaux = $this->getAnimauxParType($type['id_type_animal']);
-            $nb_animaux_nourris = 0; // Nouveau compteur pour les animaux nourris
-    
-            // Récupérer la dernière date d’alimentation de chaque animal
-            $dernieres_dates = $this->getDernierHistoriqueParAnimal();
-            $dates_animaux = [];
-            foreach ($dernieres_dates as $historique) {
-                $dates_animaux[$historique['id_animal']] = $historique['derniere_date'];
-            }
-    
-            // Parcourir les jours de la simulation
-            for ($jour = strtotime($date_debut); $jour <= strtotime($date_fin); $jour += 86400) {
-                $date_actuelle = date('Y-m-d', $jour);
-    
-                foreach ($animaux as &$animal) {
-                    $dernier_repas = $dates_animaux[$animal['id_animal']] ?? $date_debut;
-                    $jours_sans_manger = (strtotime($date_actuelle) - strtotime($dernier_repas)) / 86400;
-    
-                    if ($jours_sans_manger > $jours_max_sans_manger) {
-                        $statut = "Mort";
-                        continue; // Ne plus modifier son poids
-                    } else {
-                        $statut = "Vivant";
-                    }
-    
-                    if ($stock_disponible > 0) {
-                        // Nourrir l’animal s’il reste du stock
-                        $animal['poids_initial'] += $gain;
-                        $stock_disponible -= 1;
-                        $dates_animaux[$animal['id_animal']] = $date_actuelle;
-                        
-                        // Incrémenter le compteur des animaux nourris
-                        if (!isset($animal['déjà_nourri'])) {
-                            $nb_animaux_nourris++;
-                            $animal['déjà_nourri'] = true; // Marquer qu’il a été nourri au moins une fois
-                        }
-                    } else {
-                        // Appliquer la perte de poids en pourcentage
-                        $animal['poids_initial'] -= ($animal['poids_initial'] * ($perte_poids / 100));
-    
-                        if ($stock_vidé === null) {
-                            $stock_vidé = $date_actuelle;
-                        }
-                    }
-                }
-            }
-    
-            // Ajouter la situation finale des animaux
-            foreach ($animaux as $animal) {
-                $dernier_repas = $dates_animaux[$animal['id_animal']] ?? "Jamais nourri";
-                $jours_sans_manger = (strtotime($date_fin) - strtotime($dernier_repas)) / 86400;
-                $statut = ($jours_sans_manger > $jours_max_sans_manger) ? "Mort" : "Vivant";
-    
-                $situation_animaux[] = [
-                    'id_animal' => $animal['id_animal'],
-                    'animal' => $animal['nom_animal'],
-                    'image' => $animal['image_animal'],
-                    'poids_final' => $this->verifPoidsMax($animal['poids_initial'], $animal['poids_maximal']),
-                    'poids_max' => $animal['poids_maximal'],
-                    'type_animal' => $type['nom_type'],
-                    'dernier_repas' => $dernier_repas,
-                    'nombre_sans_manger' => $jours_sans_manger,
-                    'statut' => $statut
-                ];
-            }
-    
-            // Ajouter la situation du stock avec le nombre d'animaux nourris
-            $situation_stocks[] = [
-                'nom_aliment' => $nom_aliment,
-                'type_animal' => $stock_animaux,
-                'stock_initial' => $stock_initial,
-                'stock_final' => $stock_disponible,
-                'stock_vidé_le' => $stock_vidé ?? "Non vidé",
-                'animaux_nourris' => $nb_animaux_nourris // Nombre d'animaux nourris avec ce stock
-            ];
-        }
-    
-        return [
-            'animaux' => $situation_animaux,
-            'stocks' => $situation_stocks
-        ];
-    }
-        
-
 
 
 
@@ -174,4 +71,128 @@ class PrevisionModel
     }
 
 
+    public function alimenterAnimaux($date_debut, $date_fin)
+    {
+        $types_animaux = $this->getTypesAnimaux();
+        $situation_animaux = [];
+        $situation_stocks = [];
+
+        foreach ($types_animaux as $type) {
+            $stock_info = $this->getStockDisponible($type['id_alimentation']);
+            $stock_disponible = $stock_info['quantite'];
+            $animaux = $this->getAnimauxParType($type['id_type_animal']);
+
+            $resultat = $this->simulerAlimentation($animaux, $type, $stock_disponible, $date_debut, $date_fin);
+
+            $situation_animaux = array_merge($situation_animaux, $resultat['animaux']);
+            $situation_stocks[] = [
+                'nom_aliment' => $stock_info['nom_aliment'],
+                'type_animal' => $type['nom_type'],
+                'stock_initial' => $stock_info['quantite'],
+                'stock_final' => $resultat['stock_disponible'],
+                'stock_vidé_le' => $resultat['stock_vidé'] ?? "Non vidé",
+                'animaux_nourris' => $resultat['animaux_nourris']
+            ];
+        }
+
+        return ['animaux' => $situation_animaux, 'stocks' => $situation_stocks];
+    }
+
+    private function simulerAlimentation($animaux, $type, &$stock_disponible, $date_debut, $date_fin)
+    {
+        $dates_animaux = $this->initialiserDatesRepas($animaux, $date_debut);
+        $nb_animaux_nourris = 0;
+        $stock_vidé = null;
+
+        for ($jour = strtotime($date_debut); $jour <= strtotime($date_fin); $jour += 86400) {
+            $date_actuelle = date('Y-m-d', $jour);
+            usort($animaux, [$this, 'trierAnimauxParProximiteVente']);
+
+            foreach ($animaux as &$animal) {
+                $this->traiterAnimal($animal, $type, $dates_animaux, $stock_disponible, $date_actuelle, $nb_animaux_nourris, $stock_vidé);
+            }
+            unset($animal);
+        }
+
+        return [
+            'animaux' => $this->genererSituationAnimaux($animaux, $type, $dates_animaux, $date_fin),
+            'stock_disponible' => $stock_disponible,
+            'stock_vidé' => $stock_vidé,
+            'animaux_nourris' => $nb_animaux_nourris
+        ];
+    }
+
+    private function initialiserDatesRepas($animaux, $date_debut)
+    {
+        $dates_animaux = [];
+        foreach ($animaux as $animal) {
+            $dates_animaux[$animal['id_animal']] = $date_debut;
+        }
+        return $dates_animaux;
+    }
+
+    private function trierAnimauxParProximiteVente($animal1, $animal2)
+    {
+        return abs($animal1['poids_initial'] - $animal1['poids_min_vente']) <=> abs($animal2['poids_initial'] - $animal2['poids_min_vente']);
+    }
+
+    
+    private function traiterAnimal(&$animal, $type, &$dates_animaux, &$stock_disponible, $date_actuelle, &$nb_animaux_nourris, &$stock_vidé)
+{
+    $dernier_repas = $dates_animaux[$animal['id_animal']];
+    $jours_sans_manger = (strtotime($date_actuelle) - strtotime($dernier_repas)) / 86400;
+
+    if ($jours_sans_manger > $type['nb_jour_sans_manger']) {
+        $animal['statut'] = "Mort";
+        return;
+    }
+
+    if ($animal['auto_vente'] == 1 && $animal['poids_initial'] >= $type['poids_min_vente']) {
+        $animal['statut'] = "Vente";
+        return;
+    }
+
+    // Suppression de la vérification de la date du dernier repas
+    // pour permettre de nourrir plusieurs animaux le même jour
+
+    if ($stock_disponible >= $type['quota']) {
+        $animal['poids_initial'] += $type['gain'];
+        $stock_disponible -= $type['quota'];
+        $dates_animaux[$animal['id_animal']] = $date_actuelle; // Mise à jour de la date du dernier repas
+
+        if (!isset($animal['déjà_nourri'])) {
+            $nb_animaux_nourris++;
+            $animal['déjà_nourri'] = true;
+        }
+    } else {
+        $animal['poids_initial'] -= ($animal['poids_initial'] * ($type['perte_poids'] / 100));
+        if ($stock_vidé === null) {
+            $stock_vidé = $date_actuelle;
+        }
+    }
+}
+
+    private function genererSituationAnimaux($animaux, $type, $dates_animaux, $date_fin)
+    {
+        $situation_animaux = [];
+        foreach ($animaux as $animal) {
+            $dernier_repas = $dates_animaux[$animal['id_animal']];
+            $jours_sans_manger = (strtotime($date_fin) - strtotime($dernier_repas)) / 86400;
+            $statut = ($jours_sans_manger > $type['nb_jour_sans_manger']) ? "Mort" : ($animal['statut'] ?? "Vivant");
+
+            $situation_animaux[] = [
+                'id_animal' => $animal['id_animal'],
+                'animal' => $animal['nom_animal'],
+                'image' => $animal['image_animal'],
+                'poids_final' => $this->verifPoidsMax($animal['poids_initial'], $animal['poids_maximal']),
+                'poids_max' => $animal['poids_maximal'],
+                'type_animal' => $type['nom_type'],
+                'quota' => $type['quota'],
+                'dernier_repas' => $dernier_repas,
+                'nombre_sans_manger' => $jours_sans_manger,
+                'statut' => $statut
+            ];
+        }
+        return $situation_animaux;
+    }
 }

@@ -32,7 +32,7 @@
         </li>
 
         <li class="menu-item">
-          <a href="ctype/liste" class="menu-link">
+          <a href="<?= constant('BASE_URL')?>type/liste" class="menu-link">
             <div data-i18n="Without menu">Modification Type Animal </div>
           </a>
         </li>

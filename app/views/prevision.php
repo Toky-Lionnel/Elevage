@@ -55,7 +55,7 @@
             var animalHTML = `
                 <div class="col mt-5">
                     <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden mt-5">
-                        <img class="card-img-top img-fluid" src="${animal.image}" alt="Image de ${animal.animal}" style="height: 200px; object-fit: cover;">
+                        <img class="card-img-top img-fluid" src="${baseUrl}${animal.image}" alt="Image de ${animal.animal}" style="height: 200px; object-fit: cover;">
 
                         <div class="card-body text-center p-3">
                             <h5 class="card-title text-dark fw-bold">${animal.animal}</h5>
@@ -65,12 +65,15 @@
                                 <strong>Poids Max :</strong> ${animal.poids_max} kg<br>
                                 <strong>Dernier repas :</strong> ${animal.dernier_repas}<br>
                                 <strong>Nb jours sans manger :</strong> ${animal.nombre_sans_manger}<br>
+                                <strong> Quota :</strong> ${animal.quota}<br>
                                 <strong>Statut :</strong> <span>${animal.statut}</span>
                             </p>
                         </div>
                     </div>
                 </div>
             `;
+            console.log(baseUrl+animal.image);
+            
             htmlContent += animalHTML;
         });
 
