@@ -1,8 +1,3 @@
-    <!-- NAVBAR -->
-    <div class="navbar col-md-12 d-flex justify-content-center">
-    <?php include("navigation.php"); ?>
-</div>
-
 <!-- Striped Rows -->
 <div class="card mt-5">
     <h5 class="card-header"> Liste Alimentation </h5>

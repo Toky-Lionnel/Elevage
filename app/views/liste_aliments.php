@@ -10,11 +10,7 @@
 </head>
 
 <body>
-    <div class="d-flex">
-            <!-- NAVBAR -->
-    <div class="navbar col-md-12 d-flex justify-content-center">
-    <?php include("navigation.php"); ?>
-</div>
+
         <!-- MENU À GAUCHE -->
         <div class="menu-container col-md-3">
             <?php include("menu.php"); ?>
@@ -40,7 +36,7 @@
                     <?php foreach ($aliments as $aliment): ?>
                         <div class="col-md-4">
                             <div class="card mb-4">
-                                <img src="<?= htmlspecialchars($aliment['image_url']) ?>" class="card-img-top"
+                                <img src="<?= constant('BASE_URL') ?><?= htmlspecialchars($aliment['image_url']) ?>" class="card-img-top"
                                     alt="Image de <?= htmlspecialchars($aliment['nom_aliment']) ?>">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= htmlspecialchars($aliment['nom_aliment']) ?: 'Nom inconnu' ?>

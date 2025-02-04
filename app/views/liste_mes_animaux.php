@@ -32,7 +32,7 @@
                         <?php foreach ($animaux as $animal): ?>
                             <div class="col">
                                 <div class="card h-100 shadow-sm">
-                                    <img class="card-img-top" src="<?= htmlspecialchars($animal['image_animal']) ?>"
+                                    <img class="card-img-top" src="<?= constant('BASE_URL') ?><?= htmlspecialchars($animal['image_animal']) ?>"
                                         alt="Image de <?= htmlspecialchars($animal['nom_animal']) ?>">
                                     <div class="card-body text-center">
                                         <h5 class="card-title"><?= htmlspecialchars($animal['nom_animal']) ?: 'Nom inconnu' ?></h5>
