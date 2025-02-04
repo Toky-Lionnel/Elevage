@@ -12,16 +12,12 @@
 </head>
 
 <body>
-    <!-- NAVBAR -->
-    <div class="navbar col-md-12 d-flex justify-content-center">
-    <?php include("navigation.php"); ?>
-</div>
-
-    <div class="d-flex">
-        <!-- MENU À GAUCHE -->
-        <div class="menu-container col-md-3">
-            <?php include("menu.php"); ?>
-        </div>
+  <!-- CONTENU PRINCIPAL À DROITE -->
+        <div class="d-flex">
+            <!-- MENU À GAUCHE -->
+            <div class="menu-container col-md-3">
+                <?php include("menu.php"); ?>
+            </div>
 
             <!-- CONTENU PRINCIPAL À DROITE -->
             <div class="content-container col-md-9">
@@ -52,7 +48,7 @@
                                                 <div class="form-group">
                                                     <label for="auto_vente_<?= $animal['id_animal'] ?>">Auto-Vente :</label>
                                                     <input type="checkbox" name="auto_vente"
-                                                        id="auto_vente_<?= $animal['id_animal'] ?>" value="0">
+                                                        id="auto_vente_<?= $animal['id_animal'] ?>" value="1">
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Acheter</button>
                                             </form>
@@ -70,7 +66,7 @@
 
         <footer class="footer mt-auto py-3 bg-dark text-white">
             <div class="container text-center">
-                <p>&copy; 2025 Projet Final. Tous droits réservés.</p>
+                <p>&copy; 2025 Ton Application. Tous droits réservés.</p>
                 <p>Développé avec <span style="color: red;">&#9829;</span> par Lionnel(ETU003140), Faniry (ETU003149)et
                     Valerie(ETU003233)</p>
             </div>

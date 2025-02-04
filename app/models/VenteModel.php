@@ -31,10 +31,20 @@ class VenteModel
             return false; 
         }
     }
-    public function getAnimalsForSale() {
+    public function getAnimalsForSale(){
         $stmt = $this->db->prepare("
-            SELECT * FROM elevage_Animal 
-            WHERE date_mort IS NULL AND auto_vente = 1 AND en_vente = 0
+            SELECT 
+                a.id_animal,
+                a.nom_animal,
+                a.poids_initial,
+                a.image_animal,
+                t.nom_type,
+                t.poids_min_vente,
+                t.poids_maximal,
+                t.prix_vente_kg
+            FROM elevage_Animal a
+            JOIN elevage_Type_Animal t ON a.id_type_animal = t.id_type_animal
+            WHERE a.en_vente = 0
         ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
