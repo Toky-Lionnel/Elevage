@@ -23,13 +23,12 @@ public function acheterAliment() {
     if ($quantite > 0) {
         $result = Flight::FoodModel()->acheterAliment($id_alimentation, $quantite);
         if ($result) {
-            Flight::redirect(constant('BASE_URL') . 'aliments/liste'); // Rediriger vers la liste après achat
+            Flight::redirect(constant('BASE_URL').'liste/alimentation'); // Rediriger vers la liste après achat
         } else {
-            // Gérer le cas d'argent insuffisant
-            Flight::redirect(constant('BASE_URL') . 'aliments/liste?error=argent_insuffisant');
+            Flight::redirect(constant('BASE_URL').'liste/alimentation?error=argent_insuffisant');
         }
     } else {
-        Flight::redirect(constant('BASE_URL') . 'aliments/liste?error=quantite_invalide');
+        Flight::redirect(constant('BASE_URL').'liste/alimentation?error=quantite_invalide');
     }
 }
 

@@ -53,8 +53,9 @@
                                             onclick="adjustQuantity(<?= $aliment['id_alimentation'] ?>, 1)">+</button>
                                     </div>
 
-                                    <a href="<?= constant('BASE_URL') ?>aliments/achat/<?= $aliment['id_alimentation'] ?>?quantity=0"
+                                    <a href="<?= constant('BASE_URL') ?>achat/alimentation?id=<?= $aliment['id_alimentation'] ?>&quantity=0"
                                         class="btn btn-primary" id="buy-button-<?= $aliment['id_alimentation'] ?>">Acheter</a>
+
                                 </div>
                             </div>
                         </div>
@@ -78,11 +79,18 @@
         function adjustQuantity(id, change) {
             const quantityInput = document.getElementById(`quantity-${id}`);
             let currentValue = parseInt(quantityInput.value);
+
             currentValue += change;
-            if (currentValue < 0) currentValue = 0; // Ne pas permettre de quantités négatives
+            if (currentValue < 0) currentValue = 0; // Empêcher les quantités négatives
             quantityInput.value = currentValue;
-            document.getElementById(`buy-button-${id}`).href = "<?= constant('BASE_URL') ?>aliments/achat/" + id + "?quantity=" + currentValue; // Mettre à jour le lien du bouton "Acheter"
+
+            // Mettre à jour dynamiquement l'URL avec l'ID et la quantité
+            const buyButton = document.getElementById(`buy-button-${id}`);
+            const baseUrl = "<?= constant('BASE_URL') ?>achat/alimentation";
+            buyButton.href = `${baseUrl}?id=${id}&quantity=${currentValue}`;
         }
+
+
     </script>
 </body>
 

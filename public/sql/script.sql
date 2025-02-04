@@ -39,7 +39,7 @@ CREATE TABLE elevage_Stock (
 );
 
 CREATE TABLE elevage_Argent (
-   argent DECIMAL(10,2)
+   argent DECIMAL(10,2) NOT NULL DEFAULT 0.00
 );
 
 

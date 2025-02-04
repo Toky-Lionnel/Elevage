@@ -10,6 +10,8 @@ use app\models\VenteModel;
 use app\models\MesAnimauxModel;
 use app\models\PrevisionModel;
 use app\models\FoodModel;
+use app\models\StockModel;
+use app\models\ResetModel;
 
 /** 
  * @var array $config This comes from the returned array at the bottom of the config.php file
@@ -54,4 +56,10 @@ Flight::map('PrevisionModel', function() {
 });
 Flight::map('FoodModel', function() {
     return new FoodModel(Flight::db());  
+});
+Flight::map('StockModel', function() {
+    return new StockModel(Flight::db());  
+});
+Flight::map('ResetModel', function() {
+    return new ResetModel(Flight::db());  
 });

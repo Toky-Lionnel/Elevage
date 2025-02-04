@@ -1,9 +1,9 @@
-INSERT INTO elevage_Alimentation (nom_aliment, image_url, gain) VALUES
-('Maïs', 'url_maïs.jpg', 5.00),
-('Soja', 'url_soja.jpg', 6.50),
-('Foin', 'url_foin.jpg', 2.50),
-('Granulés', 'url_granules.jpg', 7.00),
-('Herbe', 'url_herbe.jpg', 3.00);
+INSERT INTO elevage_Alimentation (nom_aliment, image_url, gain, prix) VALUES
+('Maïs', 'url_maïs.jpg', 5.00, 1.50),   -- Ajout d'un prix pour le maïs
+('Soja', 'url_soja.jpg', 6.50, 2.00),   -- Ajout d'un prix pour le soja
+('Foin', 'url_foin.jpg', 2.50, 0.80),   -- Ajout d'un prix pour le foin
+('Granulés', 'url_granules.jpg', 7.00, 2.50), -- Ajout d'un prix pour les granulés
+('Herbe', 'url_herbe.jpg', 3.00, 0.50); -- Ajout d'un prix pour l'herbe
 
 INSERT INTO elevage_Type_Animal (nom_type, poids_min_vente, poids_maximal, prix_vente_kg, nb_jour_sans_manger, perte_poids, id_alimentation) VALUES
 ('Poulet', 1.20, 3.50, 5.00, 3, 0.10, 1),
@@ -55,6 +55,7 @@ INSERT INTO elevage_Historique_Alimentation (id_animal, date_alimentation, poids
 
 
 INSERT INTO elevage_Argent(argent) VALUES(0);
+update elevage_Argent set argent = 1000;
 
 INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (1, 100);
 INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES (2, 20);

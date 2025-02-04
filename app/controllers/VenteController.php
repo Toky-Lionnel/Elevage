@@ -20,7 +20,7 @@ class VenteController {
         if ($result) {
             Flight::redirect(constant('BASE_URL').'animaux/liste/vente'); 
         } else {
-            Flight::redirect('/erreur'); 
+            Flight::redirect(constant('BASE_URL').'/erreur'); 
         }
     }
     

@@ -7,6 +7,8 @@ use app\controllers\VenteController;
 use app\controllers\AnimauxController;
 use app\controllers\FoodController;
 use app\controllers\PrevisionController;
+use app\controllers\StockController;
+use app\controllers\ResetController;
 use flight\Engine;
 use flight\net\Router;
 //use Flight;
@@ -18,6 +20,8 @@ $Vente_Controller = new VenteController();
 $Animaux_Controller = new AnimauxController();
 $Food_Controller = new FoodController();
 $Prevision_Controller = new PrevisionController();
+$Stock_Controller = new StockController();
+$Reset_Controller = new ResetController();
 
 $router->get('/', [$Login_Controller, 'loginUtilisateur']);
 $router->post('/connexion', [$Login_Controller, 'verifUtilisateur']);
@@ -54,3 +58,9 @@ $router->get('/liste/alimentation', [$Food_Controller, 'listAliments']);
 
 
 $router->get('/prevision',[$Prevision_Controller,'prepaPrevision']);
+
+$router->get('/achat/alimentation', [$Food_Controller, 'acheterAliment']);
+
+$router->get('/liste/stock', [$Stock_Controller, 'afficherStock']);
+
+$router->get('/reset', [$Reset_Controller, 'reset']);
