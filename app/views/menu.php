@@ -50,6 +50,24 @@
           </a>
         </li>
 
+        <li class="menu-item">
+          <a href="<?= constant('BASE_URL')?>liste/stock" class="menu-link">
+            <div data-i18n="Without menu"> Liste stocks </div>
+          </a>
+        </li>
+
+        <li class="menu-item">
+          <a href="<?= constant('BASE_URL')?>animaux/liste/vente" class="menu-link">
+            <div data-i18n="Without menu"> Marketplace </div>
+          </a>
+        </li>
+
+        <li class="menu-item">
+          <a href="<?= constant('BASE_URL')?>liste/alimentation" class="menu-link">
+            <div data-i18n="Without menu"> Acheter nourritures </div>
+          </a>
+        </li>
+
 
       </ul>
     </li>
