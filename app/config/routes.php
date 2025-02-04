@@ -52,7 +52,7 @@ $router->get('/animaux/achat/@id', [$Vente_Controller,'acheterAnimal']);
 
 $router->post('/animaux/nourrir/@id_animal:[0-9]+', [$Animaux_Controller, 'nourrirAnimal']);
 
-
+$router->post('/animaux/vendre/@id_animal:[0-9]+', [$Animaux_Controller, 'vendreAnimal']);
 
 $router->get('/liste/alimentation', [$Food_Controller, 'listAliments']);
 

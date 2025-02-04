@@ -43,6 +43,7 @@ CREATE TABLE elevage_Argent (
    argent DECIMAL(10,2) NOT NULL DEFAULT 0.00
 );
 
+INSERT INTO elevage_Argent (argent) VALUES (1000.00);
 
 CREATE TABLE elevage_Historique_Alimentation(
    id_historique INTEGER AUTO_INCREMENT PRIMARY KEY,

@@ -70,7 +70,12 @@
                                 </a
                               >
                               <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
+                                ><i class="bx bx-trash me-1"></i>
+                                <form action="<?= constant('BASE_URL')?>animaux/vendre/<?php echo $animal['id_animal']; ?>" method="post">
+                            <input type="date" name="dateFin" required>
+                            <button type="submit">Mettre en vente</button>
+                        </form> 
+                                </a
                               >
                             </div>
                           </div>
