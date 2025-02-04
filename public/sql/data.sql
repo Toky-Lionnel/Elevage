@@ -5,12 +5,12 @@ INSERT INTO elevage_Alimentation (nom_aliment, image_url, gain, prix) VALUES
 ('Granulés', 'url_granules.jpg', 7.00, 2.50), -- Ajout d'un prix pour les granulés
 ('Herbe', 'url_herbe.jpg', 3.00, 0.50); -- Ajout d'un prix pour l'herbe
 
-INSERT INTO elevage_Type_Animal (nom_type, poids_min_vente, poids_maximal, prix_vente_kg, nb_jour_sans_manger, perte_poids, id_alimentation) VALUES
-('Poulet', 1.20, 3.50, 5.00, 3, 0.10, 1),
-('Bœuf', 250.00, 900.00, 4.50, 5, 10.00, 2),
-('Mouton', 30.00, 80.00, 6.00, 4, 2.00, 3),
-('Cochon', 50.00, 150.00, 5.50, 4, 5.00, 4),
-('Lapin', 2.00, 5.00, 7.00, 2, 0.20, 5);
+INSERT INTO elevage_Type_Animal (nom_type, poids_min_vente, poids_maximal, prix_vente_kg, nb_jour_sans_manger, perte_poids, id_alimentation, quota) VALUES
+('Poulet', 1.20, 3.50, 5.00, 3, 0.10, 1, 0.50),
+('Bœuf', 250.00, 900.00, 4.50, 5, 10.00, 2, 15.00),
+('Mouton', 30.00, 80.00, 6.00, 4, 2.00, 3, 5.00),
+('Cochon', 50.00, 150.00, 5.50, 4, 5.00, 4, 10.00),
+('Lapin', 2.00, 5.00, 7.00, 2, 0.20, 5, 0.30);
 
 -- Inserting data into elevage_Animal
 INSERT INTO elevage_Animal (id_type_animal, poids_initial, image_animal, nom_animal, en_vente)

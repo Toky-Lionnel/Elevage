@@ -42,11 +42,11 @@ class ModifTypeModel
     }
 
 
-    public function modifierTypeAnimal($id_type_animal, $nom_type, $poids_min_vente, $poids_maximal, $prix_vente_kg, $nb_jour_sans_manger, $perte_poids, $id_alimentation)
+    public function modifierTypeAnimal($id_type_animal, $nom_type, $poids_min_vente, $poids_maximal, $prix_vente_kg, $nb_jour_sans_manger, $perte_poids, $id_alimentation,$quota)
     {
         $stmt = $this->db->prepare("UPDATE elevage_Type_Animal 
-        SET nom_type = ?, poids_min_vente = ?, poids_maximal = ?, prix_vente_kg = ?, nb_jour_sans_manger = ?, perte_poids = ?, id_alimentation = ?
+        SET nom_type = ?, poids_min_vente = ?, poids_maximal = ?, prix_vente_kg = ?, nb_jour_sans_manger = ?, perte_poids = ?, id_alimentation = ?, quota = ?
         WHERE id_type_animal = ?");
-        return $stmt->execute([$nom_type, $poids_min_vente, $poids_maximal, $prix_vente_kg, $nb_jour_sans_manger, $perte_poids, $id_alimentation, $id_type_animal]);
+        $stmt->execute([$nom_type, $poids_min_vente, $poids_maximal, $prix_vente_kg, $nb_jour_sans_manger, $perte_poids, $id_alimentation, $quota,$id_type_animal]);
     }
 }

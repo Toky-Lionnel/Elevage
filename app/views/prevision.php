@@ -13,18 +13,11 @@
 </form>
 
 
+<h2 class="mt-5 text-center text-primary" id="prev_anim"> </h2>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="page_prevision"></div>
 
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="page_prevision">
-
-
-</div>
-
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="page_stocks">
-
-
-</div>
-
-
+<h2 class="mt-5 text-center text-success" id="prev_stock"> </h2>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="page_stocks"></div>
 
 <script>
     var baseUrl = "<?= constant('BASE_URL') ?>";
@@ -56,80 +49,60 @@
     }
 
     function generateAnimalHTML(animals) {
-        var htmlContent = '';
+        var htmlContent = "";
 
         animals.forEach(function(animal) {
             var animalHTML = `
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <!-- Affichage de l'image de l'animal -->
-                <img class="card-img-top" src="${animal.image}" alt="Image de ${animal.animal}" />
+                <div class="col mt-5">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden mt-5">
+                        <img class="card-img-top img-fluid" src="${animal.image}" alt="Image de ${animal.animal}" style="height: 200px; object-fit: cover;">
 
-                <div class="card-body text-center">
-                    <h5 class="card-title">${animal.animal}</h5>
-
-                    <p class="card-text">
-                        <strong>Type :</strong> ${animal.type_animal}<br>
-                        <strong>Poids Final :</strong> ${animal.poids_final} kg<br>
-                        <strong>Poids Max :</strong> ${animal.poids_max} kg<br>
-                        <strong>Dernier repas :</strong> ${animal.dernier_repas}<br>
-                        <strong>Nb jours sans manger :</strong> ${animal.nombre_sans_manger}<br>
-                        <strong>Statut :</strong> ${animal.statut}
-                    </p>
+                        <div class="card-body text-center p-3">
+                            <h5 class="card-title text-dark fw-bold">${animal.animal}</h5>
+                            <p class="card-text text-muted">
+                                <strong>Type :</strong> ${animal.type_animal}<br>
+                                <strong>Poids Final :</strong> ${animal.poids_final} kg<br>
+                                <strong>Poids Max :</strong> ${animal.poids_max} kg<br>
+                                <strong>Dernier repas :</strong> ${animal.dernier_repas}<br>
+                                <strong>Nb jours sans manger :</strong> ${animal.nombre_sans_manger}<br>
+                                <strong>Statut :</strong> <span>${animal.statut}</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        `;
-            htmlContent += animalHTML; // Ajouter chaque carte au contenu HTML
+            `;
+            htmlContent += animalHTML;
         });
 
-        // Insérer le HTML généré dans la page
         document.getElementById('page_prevision').innerHTML = htmlContent;
+        document.getElementById('prev_anim').innerHTML = "Prévision de l'état des animaux";
     }
 
-
     function generateStockHTML(stocks) {
-        var htmlContent = '';
+        var htmlContent = "";
 
         stocks.forEach(function(stock) {
             var stockHTML = `
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title">${stock.nom_aliment}</h5>
-
-                    <p class="card-text">
-                        <strong>Type d'animal :</strong> ${stock.type_animal}<br>
-                        <strong>Stock initial :</strong> ${stock.stock_initial} unités<br>
-                        <strong>Stock disponible :</strong> ${stock.stock_final} unités<br>
-                        <strong>Stock vidé le :</strong> ${stock.stock_vidé_le}<br>
-                        <strong>Animaux nourris :</strong> ${stock.animaux_nourris}
-                    </p>
+                <div class="col mt-5">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 mt-5">
+                        <div class="card-body text-center p-3">
+                            <h5 class="card-title text-dark fw-bold">${stock.nom_aliment}</h5>
+                            <p class="card-text text-muted">
+                                <strong>Type d'animal :</strong> ${stock.type_animal}<br>
+                                <strong>Stock initial :</strong> ${stock.stock_initial} unités<br>
+                                <strong>Stock disponible :</strong> ${stock.stock_final} unités<br>
+                                <strong>Stock vidé le :</strong> ${stock.stock_vidé_le}<br>
+                                <strong>Animaux nourris :</strong> ${stock.animaux_nourris}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        `;
-            htmlContent += stockHTML; // Ajouter chaque carte au contenu HTML
+            `;
+            htmlContent += stockHTML;
         });
 
-        // Insérer le HTML généré dans la page
         document.getElementById('page_stocks').innerHTML = htmlContent;
+        document.getElementById('prev_stock').innerHTML = "Prévision des stocks";
+
     }
-
-
-    function fetchData() {
-        fetch('votre_script_php.php') // Remplacez par l'URL de votre script PHP
-            .then(response => response.json())
-            .then(data => {
-                // Générer le HTML pour les animaux
-                generateAnimalHTML(data.animaux);
-
-                // Générer le HTML pour les stocks (si nécessaire)
-                generateStockHTML(data.stocks);
-            })
-            .catch(error => console.error('Erreur lors de la récupération des données :', error));
-    }
-
-    // Appeler la fonction pour récupérer les données
-    fetchData();
 </script>

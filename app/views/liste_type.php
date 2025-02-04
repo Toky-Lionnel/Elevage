@@ -13,6 +13,7 @@
                     <th> % perte poids </th>
                     <th> Alimentation </th>
                     <th> Gain </th>
+                    <th> Quota nourriture </th>
                     <th>Modifier</th>
                 </tr>
             </thead>
@@ -28,6 +29,7 @@
                         <td> <?= $type['perte_poids'] ?> </td>
                         <td> <?= $type['nom_aliment'] ?> </td>
                         <td> <?= $type['gain'] ?> </td>
+                        <td> <?= $type['quota'] ?> </td>
 
 
                         <td>

@@ -42,6 +42,11 @@
                             <input type="number" class="form-control" name="perte_poids" value="<?= $type['perte_poids'] ?>" required />
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label" for="company"> Quota nourriture </label>
+                            <input type="number" class="form-control" name="quota" value="<?= $type['quota'] ?>" required />
+                        </div>
+
                         
 
                         <div class="mb-3">

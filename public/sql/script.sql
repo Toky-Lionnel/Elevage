@@ -15,6 +15,7 @@ CREATE TABLE elevage_Type_Animal(
    prix_vente_kg DECIMAL(10,2) NOT NULL,
    nb_jour_sans_manger INT,
    perte_poids DECIMAL(10,2) NOT NULL,
+   quota DECIMAL(10,2) NOT NULL DEFAULT 0.00,
    id_alimentation INT,
    FOREIGN KEY(id_alimentation) REFERENCES elevage_Alimentation(id_alimentation)
 );

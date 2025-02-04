@@ -40,12 +40,14 @@ class ModifTypeController {
         $nom = $data->nom;
         $poids_min = $data->poids_min;
         $prix = $data->prix_vente;
-        $poids_max = $data->poids_max;
+        $poids_maxFlight::redirect(constant('BASE_URL').'type/liste'); = $data->poids_max;
         $nb_jour = $data->nb_jour;
         $perte = $data->perte_poids;
         $alim = $data->alimentation;
-       
-        Flight::ModifTypeModel()->modifierTypeAnimal($id,$nom, $poids_min, $poids_max,$prix,$nb_jour,$perte,$alim);
+        $quota = $data->quota;
+
+
+        Flight::ModifTypeModel()->modifierTypeAnimal($id,$nom, $poids_min, $poids_max,$prix,$nb_jour,$perte,$alim,$quota);
         Flight::redirect(constant('BASE_URL').'type/liste');
     }
 
