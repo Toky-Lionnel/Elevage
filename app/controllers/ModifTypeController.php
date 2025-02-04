@@ -20,6 +20,29 @@ class ModifTypeController {
 
     }
 
+    public function listeAlimentation () {
+
+        $allType = Flight::ModifTypeModel()->getAllAlimentation();
+        $listeData = ['allAlim' => $allType];
+        Flight::render('liste_alimentation', $listeData, 'contenu');
+        Flight::render('template_the');
+
+    }
+
+
+    public function prepaModifAlim ($id) {
+
+        $type = Flight::ModifTypeModel()->getAlimentationById($id);
+
+        $listeData = ['alimentation' => $type];
+
+        Flight::render('modif_type', $listeData, 'contenu');
+
+        Flight::render('template_the');
+    }
+
+    
+
     public function prepaModifType ($id) {
 
         $type = Flight::ModifTypeModel()->getTypeById($id);

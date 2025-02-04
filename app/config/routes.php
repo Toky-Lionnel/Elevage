@@ -39,6 +39,9 @@ $router->group('/type' , function () use ($router, $Modif_Type_Controller) {
     $router->post('/modifier/@id_type:[0-9]+', [$Modif_Type_Controller, 'modificationType']);
 });
 
+$router->get('/alimentation/liste', [$Modif_Type_Controller,'listeAlimentation']);
+
+
 $router->get('/depot', [$Depot_Controller, 'preDepot']);
 $router->post('/depot', [$Depot_Controller, 'updateArgent']);
 
@@ -52,7 +55,7 @@ $router->get('/animaux/achat/@id', [$Vente_Controller,'acheterAnimal']);
 
 $router->post('/animaux/nourrir/@id_animal:[0-9]+', [$Animaux_Controller, 'nourrirAnimal']);
 
-
+$router->post('/animaux/vendre/@id_animal:[0-9]+', [$Animaux_Controller, 'vendreAnimal']);
 
 $router->get('/liste/alimentation', [$Food_Controller, 'listAliments']);
 

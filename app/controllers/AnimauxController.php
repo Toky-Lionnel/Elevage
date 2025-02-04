@@ -33,4 +33,19 @@ class AnimauxController {
         }
         Flight::redirect(constant('BASE_URL').'animaux/liste');
     }
+
+    public function vendreAnimal($idAnimal){
+        if (!isset($_POST['dateFin'])) {
+            // Gérer l'erreur si la date n'est pas envoyée
+            die("Date d'alimentation requise.");
+        }
+        $date_fin = $_POST['dateFin'];
+        $poid = Flight::MesAnimauxModel()->calculerPoidsAnimal($idAnimal, $date_fin);
+        Flight::MesAnimauxModel()->updatePoidsAnimal($idAnimal, $poid);
+        $prix = Flight::MesAnimauxModel()->Prix($idAnimal, $poid);
+        Flight::MesAnimauxModel()->updateDepot($prix);
+        Flight::MesAnimauxModel()->mettreEnVente($idAnimal);
+        Flight::redirect(constant('BASE_URL').'animaux/liste');
+    }
+
 }

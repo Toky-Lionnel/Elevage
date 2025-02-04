@@ -41,6 +41,22 @@ class ModifTypeModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    
+    public function getAlimentationbyId($id_alimentation)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM elevage_Alimentation WHERE id_alimentation = ? ");
+        $stmt->execute([$id_alimentation]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function modifierGainAlimentation($id_alimentation, $nouveau_gain) 
+    {
+        $stmt = $this->db->prepare("UPDATE elevage_Alimentation 
+            SET gain = ? WHERE id_alimentation = ?");        
+        return $stmt->execute([$nouveau_gain, $id_alimentation]);
+    }
+    
 
     public function modifierTypeAnimal($id_type_animal, $nom_type, $poids_min_vente, $poids_maximal, $prix_vente_kg, $nb_jour_sans_manger, $perte_poids, $id_alimentation,$quota)
     {
