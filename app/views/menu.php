@@ -92,6 +92,12 @@
           </a>
         </li>
 
+        <li class="menu-item">
+          <a href="<?= constant('BASE_URL') ?>liste/vendre/mesanimaux" class="menu-link">
+            <div data-i18n="Without menu">Vendre mes animaux </div>
+          </a>
+        </li>
+
 
       </ul>
     </li>

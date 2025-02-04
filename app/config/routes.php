@@ -70,3 +70,5 @@ $router->get('/reset', [$Reset_Controller, 'reset']);
 
 $router->get('/liste/mesanimaux', [$Animaux_Controller, 'afficherMesAnimaux']);
 $router->post('/ajouter_date_mort', [$Animaux_Controller,'ajouterDateMort']);
+$router->post('/liste/vendre/mesanimaux',[$Vente_Controller,'listAnimalsForSaleVendre'] );
+$router->post('/vente/@id', [$Vente_Controller, 'vendreAnimal']);
