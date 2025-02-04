@@ -4,6 +4,7 @@ namespace app\models;
 
 use Flight;
 use PDO;
+use DateTime;
 
 
 class MesAnimauxModel
@@ -96,6 +97,79 @@ class MesAnimauxModel
         ");
         $stmt->execute([$id_animal, $date_alimentation, $nouveau_poids]);
     }
+
+    function calculerPoidsAnimal($id_animal, $date_debut) {
+        // Date actuelle
+        $date_actuelle = new DateTime();
+        $date_debut = new DateTime($date_debut);
+    
+        // Récupérer le poids initial de l'animal à la date donnée
+        $stmt = $this->db->prepare("
+            SELECT poids 
+            FROM elevage_Historique_Alimentation 
+            WHERE id_animal = ? AND date_alimentation <= ?
+            ORDER BY date_alimentation DESC 
+            LIMIT 1
+        ");
+        $stmt->execute([$id_animal, $date_debut->format('Y-m-d')]);
+        $poids_initial = $stmt->fetchColumn();
+    
+        if (!$poids_initial) {
+            return "Aucun enregistrement de poids trouvé pour cet animal.";
+        }
+    
+        // Récupérer le type d'animal et ses informations
+        $stmt = $$this->db->prepare("
+            SELECT eta.perte_poids, eta.nb_jour_sans_manger, ea.gain 
+            FROM elevage_Animal a
+            JOIN elevage_Type_Animal eta ON a.id_type_animal = eta.id_type_animal
+            LEFT JOIN elevage_Alimentation ea ON eta.id_alimentation = ea.id_alimentation
+            WHERE a.id_animal = ?
+        ");
+        $stmt->execute([$id_animal]);
+        $type_animal = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$type_animal) {
+            return "Informations du type d'animal introuvables.";
+        }
+    
+        $perte_poids = $type_animal['perte_poids'] / 100; // Convertir en pourcentage
+        $nb_jour_sans_manger = $type_animal['nb_jour_sans_manger'];
+        $gain_poids = ($type_animal['gain'] ?? 0) / 100; // Convertir en pourcentage
+    
+        // Récupérer les jours où l'animal a été nourri
+        $stmt = $this->db->prepare("
+            SELECT date_alimentation 
+            FROM elevage_Historique_Alimentation 
+            WHERE id_animal = ? AND date_alimentation BETWEEN ? AND ?
+        ");
+        $stmt->execute([$id_animal, $date_debut->format('Y-m-d'), $date_actuelle->format('Y-m-d')]);
+        $dates_nourri = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+        $poids = $poids_initial;
+        $jours_sans_manger = 0;
+        $date_iter = clone $date_debut;
+    
+        while ($date_iter <= $date_actuelle) {
+            $date_str = $date_iter->format('Y-m-d');
+    
+            if (in_array($date_str, $dates_nourri)) {
+                $poids *= (1 + $gain_poids);
+                $jours_sans_manger = 0; // Reset du compteur de jours sans manger
+            } else {
+                $jours_sans_manger++;
+                if ($jours_sans_manger > $nb_jour_sans_manger) {
+                    $poids *= (1 - $perte_poids);
+                }
+            }
+            
+            // Passer au jour suivant
+            $date_iter->modify('+1 day');
+        }
+    
+        return round($poids, 2); // Arrondi à deux décimales
+    }
+    
     
     
 
