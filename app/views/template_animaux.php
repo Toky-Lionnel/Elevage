@@ -8,6 +8,10 @@
     <title>Liste des animaux</title>
 </head>
 <body>
+        <!-- NAVBAR -->
+        <div class="navbar col-md-12 d-flex justify-content-center">
+    <?php include("navigation.php"); ?>
+</div>
 <div class="d-flex">
         <!-- MENU À GAUCHE -->
         <div class="menu-container col-md-3">
@@ -93,7 +97,7 @@
 
 <footer class="footer mt-auto py-3 bg-dark text-white">
         <div class="container text-center">
-            <p>&copy; 2025 Ton Application. Tous droits réservés.</p>
+            <p>&copy; 2025 Projet Final. Tous droits réservés.</p>
             <p>Développé avec <span style="color: red;">&#9829;</span> par Lionnel(ETU003140), Faniry (ETU003149)et Valerie(ETU003233)</p>
         </div>
         <?php include("foot.php"); ?>

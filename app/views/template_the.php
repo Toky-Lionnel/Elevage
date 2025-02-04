@@ -51,7 +51,7 @@
     <!-- Footer Section -->
     <footer class="footer mt-auto py-3 bg-dark text-white">
         <div class="container text-center">
-            <p>&copy; 2025 Ton Application. Tous droits réservés.</p>
+            <p>&copy; 2025 Projet Final. Tous droits réservés.</p>
             <p>Développé avec <span style="color: red;">&#9829;</span> par Lionnel,Valérie et Faniry</p>
         </div>
     </footer>

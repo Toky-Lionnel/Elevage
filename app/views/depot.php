@@ -1,3 +1,8 @@
+    <!-- NAVBAR -->
+    <div class="navbar col-md-12 d-flex justify-content-center">
+    <?php include("navigation.php"); ?>
+</div>
+
 <h1 class="text-center mb-5 mt-5"> Faire un dépôt </h1>
 
 <div class="row w-100 justify-content-center mt-5">
