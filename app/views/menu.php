@@ -44,6 +44,13 @@
         </li>
 
 
+        <li class="menu-item">
+          <a href="<?= constant('BASE_URL')?>prevision" class="menu-link">
+            <div data-i18n="Without menu"> Page de prevision </div>
+          </a>
+        </li>
+
+
       </ul>
     </li>
 

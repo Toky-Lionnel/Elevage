@@ -1,27 +1,36 @@
-<?php 
+<?php
 
 namespace app\controllers;
 
 use app\models\PrevisionModel;
 use Flight;
 
-class PrevisionController {
+class PrevisionController
+{
 
-    public function __construct() {
-
-	}
+    public function __construct() {}
 
 
-    public function prepaPrevision () {
+    public function prevision()
+    {
+        $data = Flight::request()->data;
+        $date_fin = $data->date_prev;
 
-        $date_debut = '2025-02-03';
-        $date_fin = '2025-02-18';
+        // Récupérer la date d'aujourd'hui
+        $date_debut = date('Y-m-d');
 
-        $result = Flight::PrevisionModel()->alimenterAnimaux($date_debut,$date_fin);
-
-        print_r($result);
-
+        if ($date_fin < $date_debut) {
+            Flight::json("ERROR");
+        } else {
+            $result = Flight::PrevisionModel()->alimenterAnimaux($date_debut, $date_fin);
+            Flight::json($result);
+        }
     }
 
+
+    public function prePrevision()
+    {
+        $data = ['page' => 'prevision'];
+        Flight::render('template_the', $data);
     }
-?>
+}

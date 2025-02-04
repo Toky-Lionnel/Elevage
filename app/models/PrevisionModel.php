@@ -16,6 +16,7 @@ class PrevisionModel
         $this->db = $db;
     }
 
+
     public function getTypesAnimaux()
     {
         $stmt = $this->db->prepare("SELECT * FROM elevage_Type_Animal");
@@ -101,6 +102,7 @@ class PrevisionModel
                 $situation_animaux[] = [
                     'id_animal' => $animal['id_animal'],
                     'animal' => $animal['nom_animal'],
+                    'image' => $animal['image_animal'],
                     'poids_final' => $animal['poids_initial'],
                     'type_animal' => $type['nom_type'],
                     'stock_initial' => $stock_initial,
@@ -110,8 +112,18 @@ class PrevisionModel
                 ];
             }
         }
-    
         return $situation_animaux;
+    }
+
+
+
+    function getStatus ($poids_min,$poids_act) {
+
+        if ($poids_min>=$poids_act){
+            return false; // maty 
+        }
+        return true; // en vie
+
     }
     
 }

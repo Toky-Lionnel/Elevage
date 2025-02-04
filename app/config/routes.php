@@ -57,7 +57,8 @@ $router->post('/animaux/nourrir/@id_animal:[0-9]+', [$Animaux_Controller, 'nourr
 $router->get('/liste/alimentation', [$Food_Controller, 'listAliments']);
 
 
-$router->get('/prevision',[$Prevision_Controller,'prepaPrevision']);
+$router->get('/prevision',[$Prevision_Controller,'prePrevision']);
+$router->post('/prevision',[$Prevision_Controller,'prevision']);
 
 $router->get('/achat/alimentation', [$Food_Controller, 'acheterAliment']);
 
