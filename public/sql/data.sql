@@ -53,7 +53,7 @@ VALUES
 
 
 UPDATE elevage_Argent SET argent = 1000.00;
-
+INSERT INTO elevage_Argent (argent) VALUES (1000.00);
 
 INSERT INTO elevage_Stock (id_alimentation, quantite) VALUES 
 (1, 100),

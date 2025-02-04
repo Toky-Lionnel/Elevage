@@ -52,7 +52,7 @@ $router->post('/depot',[$Depot_Controller,'updateArgent']);
 
 $router->get('/animaux/liste/vente',[$Vente_Controller,'listAnimalsForSale']);
 
-$router->get('/animaux/achat/@id', [$Vente_Controller,'acheterAnimal']);
+$router->post('/animaux/achat/@id', [$Vente_Controller, 'acheterAnimal']);
 
 
 

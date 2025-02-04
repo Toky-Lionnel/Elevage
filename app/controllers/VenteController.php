@@ -16,13 +16,17 @@ class VenteController {
     }
 
     public function acheterAnimal($id_animal) {
-        $result = Flight::VenteModel()->acheterAnimal($id_animal);
+        // Récupération des données du POST
+        $auto_vente = isset($_POST['auto_vente']) ? 0 : 1; // Si la case est cochée, auto_vente = 1
+    
+        $result = Flight::VenteModel()->acheterAnimal($id_animal, $auto_vente);
         if ($result) {
             Flight::redirect(constant('BASE_URL').'animaux/liste/vente'); 
         } else {
             Flight::redirect(constant('BASE_URL').'/erreur'); 
         }
     }
+    
     
 
 

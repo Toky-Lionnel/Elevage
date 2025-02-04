@@ -36,10 +36,11 @@ class VenteModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function acheterAnimal($id_animal) {
-        $stmt = $this->db->prepare("UPDATE elevage_Animal SET en_vente = 1 WHERE id_animal = :id_animal");
-        $result = $stmt->execute([':id_animal' => $id_animal]);
-        
+    public function acheterAnimal($id_animal, $auto_vente) {
+        // Mise à jour de l'animal avec en_vente et auto_vente
+        $stmt = $this->db->prepare("UPDATE elevage_Animal SET en_vente = 1, auto_vente = :auto_vente WHERE id_animal = :id_animal");
+        $result = $stmt->execute([':id_animal' => $id_animal, ':auto_vente' => $auto_vente]);
+    
         if ($result) {
             return true; 
         } else {
@@ -48,6 +49,7 @@ class VenteModel
             return false; 
         }
     }
+    
     
     
 
