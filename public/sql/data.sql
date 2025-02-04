@@ -1,11 +1,11 @@
 
 -- Initialisation des données
 INSERT INTO elevage_Alimentation (nom_aliment, image_url, gain, prix) VALUES
-('Maïs', 'url_maïs.jpg', 5.00, 1.50),
-('Soja', 'url_soja.jpg', 6.50, 2.00),
-('Foin', 'url_foin.jpg', 2.50, 0.80),
-('Granulés', 'url_granules.jpg', 7.00, 2.50),
-('Herbe', 'url_herbe.jpg', 3.00, 0.50);
+('Maïs','public/assets/images/mais.png', 5.00, 1.50),
+('Soja','public/assets/images/soja.png', 6.50, 2.00),
+('Foin','public/assets/images/foin.png', 2.50, 0.80),
+('Granulés','public/assets/images/granules.png', 7.00, 2.50),
+('Herbe','public/assets/images/herbe.png', 3.00, 0.50);
 
 INSERT INTO elevage_Type_Animal (nom_type, poids_min_vente, poids_maximal, prix_vente_kg, nb_jour_sans_manger, perte_poids, id_alimentation, quota) VALUES
 ('Poulet', 1.20, 3.50, 5.00, 3, 0.10, 1, 0.50),
