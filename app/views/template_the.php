@@ -18,6 +18,12 @@
             <div class="content-wrapper">
                 <!-- Content -->
 
+
+        <!-- NAVBAR -->
+        <div class="navbar col-md-12 d-flex justify-content-center">
+            <?php include("navigation.php"); ?>
+        </div>
+
                 <div class="container-xxl min-vh-100">
 
                     <?php if (isset($page)) {

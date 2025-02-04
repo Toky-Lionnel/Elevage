@@ -56,7 +56,7 @@
             <div class="col mt-5">
     <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden mt-5 hover-shadow">
         
-        <img class="card-img-top img-fluid" src="${animal.image}" alt="Image de ${animal.animal}" style="height: 200px; object-fit: cover;">
+        <img class="card-img-top img-fluid" src="${animal.image}" alt="Image de ${animal.animal}" style="max-height: 350px; object-fit: cover;">
 
         <div class="card-body text-center p-4">
             <h5 class="card-title text-dark fw-bold mb-3">${animal.animal}</h5>
@@ -73,6 +73,10 @@
                 <p class="mb-2">
                     <i class="fas fa-tag me-2 text-info"></i>
                     <strong>État :</strong> ${getLettreAutoVente(animal.auto_vente)}
+                </p>
+                <p class="mb-2">
+                    <i class="fas fa-tag me-2 text-info"></i>
+                    <strong>État :</strong> ${formatNumber(animal.poids_initial)}
                 </p>
                 <p class="mb-2">
                     <i class="fas fa-calendar-day me-2 text-secondary"></i>
@@ -144,8 +148,16 @@
     function formatNumber(number, decimals = 2, defaultValue = "N/A") {
         if (typeof number === 'number') {
             return number.toFixed(decimals);
+        } else if (typeof number === 'string') {
+            const num = Number(number); // Try to convert the string to a number
+            if (isNaN(num)) { // Check if the conversion failed (e.g., "abc" becomes NaN)
+                console.error("Invalid string input: Could not convert to a number:", number);
+                return defaultValue;
+            } else {
+                return num.toFixed(decimals); // Format the converted number
+            }
         } else {
-            console.error("Invalid input: Expected a number, but got", typeof number, "Value:", number);
+            console.error("Invalid input: Expected a number or a number string, but got", typeof number, "Value:", number);
             return defaultValue;
         }
     }
