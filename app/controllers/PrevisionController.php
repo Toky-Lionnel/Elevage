@@ -16,7 +16,6 @@ class PrevisionController
         $data = Flight::request()->data;
         $date_fin = $data->date_prev;
 
-        // Récupérer la date d'aujourd'hui
         $date_debut = date('Y-m-d');
 
         if ($date_fin < $date_debut) {
@@ -26,9 +25,6 @@ class PrevisionController
             Flight::json($result);
         }
 
-        // $result = Flight::PrevisionModel()->alimenterAnimaux($date_debut, $date_fin);
-
-        // print_r($result);
     }
 
 

@@ -28,6 +28,8 @@ CREATE TABLE elevage_Animal(
    image_animal VARCHAR(255) NOT NULL,
    nom_animal VARCHAR(60),
    en_vente INT, -- 0 en vente | 1 pas en vente
+   auto_vente INT, -- 0 auto | 1 pas auto
+   date_mort DATE DEFAULT NULL,
    FOREIGN KEY(id_type_animal) REFERENCES elevage_Type_Animal(id_type_animal)
 );
 
