@@ -25,6 +25,9 @@ class PrevisionController
             Flight::json($result);
         }
 
+        // $result = Flight::PrevisionModel()->alimenterAnimaux($date_debut, $date_fin);
+        // print_r($result);
+
     }
 
 
