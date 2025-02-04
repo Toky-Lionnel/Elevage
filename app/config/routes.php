@@ -40,6 +40,8 @@ $router->group('/type' , function () use ($router, $Modif_Type_Controller) {
 });
 
 $router->get('/alimentation/liste', [$Modif_Type_Controller,'listeAlimentation']);
+$router->get('/alimentation/modifier/@id_type:[0-9]+', [$Modif_Type_Controller,'prepaModifAlim']);
+$router->post('/alimentation/modifier/@id_type:[0-9]+', [$Modif_Type_Controller,'ModifAlim']);
 
 
 $router->get('/depot', [$Depot_Controller, 'preDepot']);

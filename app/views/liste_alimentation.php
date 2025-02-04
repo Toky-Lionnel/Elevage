@@ -9,7 +9,7 @@
                     <th> Nom Aliment </th>
                     <th> Image_url </th>
                     <th> Gain </th>
-                    <th>Modifier</th>
+                    <th>Modifier Gain</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">

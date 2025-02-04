@@ -13,48 +13,20 @@
                     <form method="post" action="<?= constant('BASE_URL')?>alimentation/modifier/<?= $alim['id_alimentation'] ?>">
                         <div class="mb-3">
                             <label class="form-label" for="fullname">Nom Alimentation </label>
-                            <input type="text" class="form-control" name="nom" value="<?= $alim['nom_alimentation'] ?>" required />
+                            <input type="text" class="form-control" name="nom" value="<?= $alim['nom_aliment'] ?>" readonly />
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label" for="company"> Poids maximal </label>
-                            <input type="number" class="form-control" name="poids_max" step="0.1" value="<?= $type['poids_maximal'] ?>" required />
+                            <label class="form-label" for="company"> Prix </label>
+                            <input type="number" class="form-control" name="prix" step="0.1" value="<?= $alim['prix'] ?>" readonly />
                         </div>
 
                         <div class="mb-3">
-                        <label for="exampleFormControlReadOnlyInput1" class="form-label">Read only</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          id="exampleFormControlReadOnlyInput1"
-                          placeholder="Readonly input here..."
-                          readonly
-                        />
-                      </div>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="company"> % perte poids </label>
-                            <input type="number" class="form-control" name="perte_poids" step="0.1" value="<?= $type['perte_poids'] ?>" required />
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="company"> Quota nourriture </label>
-                            <input type="number" class="form-control" name="quota" step="0.1" value="<?= $type['quota'] ?>" required />
+                            <label class="form-label" for="company"> Gain </label>
+                            <input type="number" class="form-control" name="gain" step="0.1" value="<?= $alim['gain'] ?>" required />
                         </div>
 
                         
-
-                        <div class="mb-3">
-                            <label for="defaultSelect" class="form-label"> Alimentation </label>
-                            <select id="defaultSelect" name="alimentation" class="form-select">
-                                <option value="<?= $type['id_alimentation'] ?>"> <?= $type['nom_aliment'] ?> </option>
-                                <?php foreach ($allAlim as $alim) {
-                                    if ($alim['id_alimentation'] != $type['id_alimentation']) { ?>
-                                        <option value="<?= $alim['id_alimentation'] ?>"><?= $alim['nom_aliment'] ?></option>
-                                <?php }
-                                } ?>
-                            </select>
-                        </div>
                     <?php } ?>
 
 

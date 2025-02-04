@@ -31,14 +31,19 @@ class ModifTypeController {
 
 
     public function prepaModifAlim ($id) {
-
         $type = Flight::ModifTypeModel()->getAlimentationById($id);
-
         $listeData = ['alimentation' => $type];
-
-        Flight::render('modif_type', $listeData, 'contenu');
-
+        Flight::render('modif_alim', $listeData, 'contenu');
         Flight::render('template_the');
+    }
+
+
+    public function ModifAlim ($id) {
+        $data = Flight::request()->data;
+        $gain = $data->gain;
+
+        Flight::ModifTypeModel()->modifierGainAlimentation($id,$gain);
+        Flight::redirect(constant('BASE_URL').'alimentation/liste');
     }
 
     
