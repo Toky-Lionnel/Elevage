@@ -69,3 +69,4 @@ $router->get('/liste/stock', [$Stock_Controller, 'afficherStock']);
 $router->get('/reset', [$Reset_Controller, 'reset']);
 
 $router->get('/liste/mesanimaux', [$Animaux_Controller, 'afficherMesAnimaux']);
+$router->post('/ajouter_date_mort', [$Animaux_Controller,'ajouterDateMort']);

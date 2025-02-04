@@ -38,18 +38,24 @@
                                         <p class="card-text">Poids max : <?= htmlspecialchars($animal['poids_maximal']) ?> kg</p>
                                         <p class="card-text">Prix vente/kg : <?= htmlspecialchars($animal['prix_vente_kg']) ?> €</p>
 
-                                        <!-- Si l'animal n'est pas en auto-vente, afficher l'option d'ajout de date de mort -->
-                                        <?php if ($animal['auto_vente'] == 1): ?>
-                                            <form method="POST" action="<?= constant('BASE_URL') ?>ajouter_date_mort">
-                                                <input type="hidden" name="id_animal" value="<?= $animal['id_animal'] ?>">
-                                                <div class="mb-2">
-                                                    <label for="date_mort_<?= $animal['id_animal'] ?>">Date de Mort :</label>
-                                                    <input type="date" name="date_mort" id="date_mort_<?= $animal['id_animal'] ?>" class="form-control" required>
-                                                </div>
-                                                <button type="submit" class="btn btn-danger w-100">Ajouter Date Mort</button>
-                                            </form>
+                                        <!-- Vérification de la date de mort -->
+                                        <?php if ($animal['date_mort'] === null): ?>
+                                            <!-- Si l'animal n'a pas de date de mort, afficher l'option d'ajout -->
+                                            <?php if ($animal['auto_vente'] == 1): ?>
+                                                <form method="POST" action="<?= constant('BASE_URL') ?>ajouter_date_mort">
+                                                    <input type="hidden" name="id_animal" value="<?= $animal['id_animal'] ?>">
+                                                    <div class="mb-2">
+                                                        <label for="date_mort_<?= $animal['id_animal'] ?>">Date de Mort :</label>
+                                                        <input type="date" name="date_mort" id="date_mort_<?= $animal['id_animal'] ?>"
+                                                            class="form-control" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-danger w-100">Ajouter Date Mort</button>
+                                                </form>
+                                            <?php else: ?>
+                                                <p class="text-success">Auto-Vente Activée</p>
+                                            <?php endif; ?>
                                         <?php else: ?>
-                                            <p class="text-success">Auto-Vente Activée</p>
+                                            <p class="text-danger">Date de Mort déjà définie : <?= htmlspecialchars($animal['date_mort']) ?></p>
                                         <?php endif; ?>
                                     </div>
                                 </div>
