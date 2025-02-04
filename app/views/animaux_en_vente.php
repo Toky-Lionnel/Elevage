@@ -12,12 +12,16 @@
 </head>
 
 <body>
-  <!-- CONTENU PRINCIPAL À DROITE -->
-        <div class="d-flex">
-            <!-- MENU À GAUCHE -->
-            <div class="menu-container col-md-3">
-                <?php include("menu.php"); ?>
-            </div>
+    <!-- NAVBAR -->
+    <div class="navbar col-md-12 d-flex justify-content-center">
+    <?php include("navigation.php"); ?>
+</div>
+
+    <div class="d-flex">
+        <!-- MENU À GAUCHE -->
+        <div class="menu-container col-md-3">
+            <?php include("menu.php"); ?>
+        </div>
 
             <!-- CONTENU PRINCIPAL À DROITE -->
             <div class="content-container col-md-9">
