@@ -19,7 +19,7 @@
                         <td> <?= $alimentation['id_alimentation'] ?></td>
                         <td> <?= $alimentation['nom_aliment'] ?> </td>
                         <td>
-                            <img id="preview-img-3" class="card-img-top image-liste" src="<?= $alimentation['image_url'] ?>" alt="Image du Thé" />
+                            <img id="preview-img-3" class="card-img-top image-liste" src="<?= constant('BASE_URL')?><?= $alimentation['image_url'] ?>" alt="Image du Thé" />
                         </td>
                         <td> <?= $alimentation['gain'] ?> </td>
                         <td>

@@ -26,13 +26,16 @@
 
       <ul class="menu-sub">
         <li class="menu-item">
+
           <a href="<?= constant('BASE_URL') ?>reset" class="menu-link">
             <div data-i18n="Without menu"> Reset </div>
           </a>
         </li>
 
         <li class="menu-item">
-          <a href="ctype/liste" class="menu-link">
+
+
+          <a href="<?= constant('BASE_URL')?>type/liste" class="menu-link">
             <div data-i18n="Without menu">Modification Type Animal </div>
           </a>
         </li>
