@@ -29,7 +29,7 @@ data-assets-path="/template/assets/" data-template="vertical-menu-template-free"
                         ?>
                             <div class="col-md-4">
                                 <div class="card mb-4">
-                                    <img src="<?= htmlspecialchars($animal['image_animal']) ?>" class="card-img-top"
+                                    <img height="200px" width="auto" src="<?= constant('BASE_URL')?><?= htmlspecialchars($animal['image_animal']) ?>" class="card-img-top"
                                         alt="Image de <?= htmlspecialchars($animal['nom_animal']) ?>">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= htmlspecialchars($animal['nom_animal']) ?: 'Nom inconnu' ?></h5>
