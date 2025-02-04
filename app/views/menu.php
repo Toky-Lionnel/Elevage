@@ -2,9 +2,9 @@
   <div class="app-brand demo">
     <a href="/admin/accueil" class="app-brand-link">
       <span class="app-brand-logo demo">
-        <img src="/assets/images/logo.jpeg" alt="Logo" width="50">
+        <img src="<?= constant('BASE_URL')?>/public/assets/images/logo.png" alt="Logo" width="70">
       </span>
-      <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+      <span class="app-brand-text demo menu-text fw-bolder ms-2">Farm shop</span>
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -26,7 +26,7 @@
 
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="<?= constant('BASE_URL')?>type/liste" class="menu-link">
+          <a href="ctype/liste" class="menu-link">
             <div data-i18n="Without menu">Modification Type Animal </div>
           </a>
         </li>
