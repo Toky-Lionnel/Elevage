@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="d-flex">
+
         <!-- MENU À GAUCHE -->
         <div class="menu-container col-md-3">
             <?php include("menu.php"); ?>
@@ -36,7 +36,7 @@
                     <?php foreach ($aliments as $aliment): ?>
                         <div class="col-md-4">
                             <div class="card mb-4">
-                                <img src="<?= htmlspecialchars($aliment['image_url']) ?>" class="card-img-top"
+                                <img src="<?= constant('BASE_URL') ?><?= htmlspecialchars($aliment['image_url']) ?>" class="card-img-top"
                                     alt="Image de <?= htmlspecialchars($aliment['nom_aliment']) ?>">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= htmlspecialchars($aliment['nom_aliment']) ?: 'Nom inconnu' ?>
@@ -69,7 +69,7 @@
 
     <footer class="footer mt-auto py-3 bg-dark text-white">
         <div class="container text-center">
-            <p>&copy; 2025 Ton Application. Tous droits réservés.</p>
+            <p>&copy; 2025 Projet Final. Tous droits réservés.</p>
             <p>Développé avec <span style="color: red;">&#9829;</span> par Lionnel(ETU003140), Faniry (ETU003149)et Valerie(ETU003233)</p>
         </div>
         <?php include("foot.php"); ?>

@@ -10,6 +10,10 @@
 </head>
 
 <body>
+        <!-- NAVBAR -->
+        <div class="navbar col-md-12 d-flex justify-content-center">
+    <?php include("navigation.php"); ?>
+</div>
     <div class="container-fluid mt-5">
         <div class="row">
             <!-- Menu à gauche -->
@@ -28,7 +32,7 @@
                         <?php foreach ($animaux as $animal): ?>
                             <div class="col">
                                 <div class="card h-100 shadow-sm">
-                                    <img class="card-img-top" src="<?= htmlspecialchars($animal['image_animal']) ?>"
+                                    <img class="card-img-top" src="<?= constant('BASE_URL') ?><?= htmlspecialchars($animal['image_animal']) ?>"
                                         alt="Image de <?= htmlspecialchars($animal['nom_animal']) ?>">
                                     <div class="card-body text-center">
                                         <h5 class="card-title"><?= htmlspecialchars($animal['nom_animal']) ?: 'Nom inconnu' ?></h5>
@@ -73,7 +77,7 @@
 
     <footer class="footer mt-auto py-3 bg-dark text-white">
         <div class="container text-center">
-            <p>&copy; 2025 Ton Application. Tous droits réservés.</p>
+            <p>&copy; 2025 Projet Final. Tous droits réservés.</p>
             <p>Développé avec <span style="color: red;">&#9829;</span> par Lionnel(ETU003140), Faniry (ETU003149)et Valerie(ETU003233)</p>
         </div>
         <?php include("foot.php"); ?>

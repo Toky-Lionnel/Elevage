@@ -23,7 +23,12 @@ $Prevision_Controller = new PrevisionController();
 $Stock_Controller = new StockController();
 $Reset_Controller = new ResetController();
 
-$router->get('/', [$Login_Controller, 'loginUtilisateur']);
+
+$router->get('/', function() {
+    Flight::redirect('animaux/liste/vente');
+});
+
+
 $router->post('/connexion', [$Login_Controller, 'verifUtilisateur']);
 $router->get('/inscription', [$Login_Controller, 'inscription']);
 $router->post('/inscription', [$Login_Controller, 'insertUtilisateur']);
