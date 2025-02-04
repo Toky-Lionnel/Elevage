@@ -29,7 +29,7 @@ data-assets-path="/template/assets/" data-template="vertical-menu-template-free"
                         ?>
                             <div class="col-md-4">
                                 <div class="card mb-4">
-                                    <img src="<?= htmlspecialchars($animal['image_animal']) ?>" class="card-img-top"
+                                    <img height="200px" width="auto" src="<?= constant('BASE_URL')?><?= htmlspecialchars($animal['image_animal']) ?>" class="card-img-top"
                                         alt="Image de <?= htmlspecialchars($animal['nom_animal']) ?>">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= htmlspecialchars($animal['nom_animal']) ?: 'Nom inconnu' ?></h5>
@@ -55,7 +55,7 @@ data-assets-path="/template/assets/" data-template="vertical-menu-template-free"
     <footer class="footer mt-auto py-3 bg-dark text-white">
         <div class="container text-center">
             <p>&copy; 2025 Ton Application. Tous droits réservés.</p>
-            <p>Développé avec <span style="color: red;">&#9829;</span> par Lionnel, Valérie et Faniry</p>
+            <p>Développé avec <span style="color: red;">&#9829;</span> par Lionnel(ETU003140), Faniry (ETU003149)et Valerie(ETU003233)</p>
         </div>
         <?php include("foot.php"); ?>
     </footer>
