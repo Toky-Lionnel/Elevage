@@ -38,6 +38,14 @@ class MesAnimauxModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function updateDateMort($id_animal, $date_mort) {
+        $stmt = $this->db->prepare("UPDATE elevage_Animal SET date_mort = :date_mort WHERE id_animal = :id_animal");
+        return $stmt->execute([
+            ':id_animal' => $id_animal,
+            ':date_mort' => $date_mort
+        ]);
+    }
+
 
 
 

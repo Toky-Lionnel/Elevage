@@ -19,13 +19,8 @@
 
             <!-- Contenu principal -->
             <div class="col-md-9">
-                <!-- Header Section -->
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="text-center mb-4">Liste de mes animaux</h2>
-                        <p class="text-center">Surveiller mes animaux et gérer leur état.</p>
-                    </div>
-                </div>
+                <h2 class="text-center mb-4">Liste de mes animaux</h2>
+                <p class="text-center">Surveillez vos animaux et gérez leur état.</p>
 
                 <!-- Liste des animaux non en vente -->
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -42,6 +37,20 @@
                                         <p class="card-text">Poids min vente : <?= htmlspecialchars($animal['poids_min_vente']) ?> kg</p>
                                         <p class="card-text">Poids max : <?= htmlspecialchars($animal['poids_maximal']) ?> kg</p>
                                         <p class="card-text">Prix vente/kg : <?= htmlspecialchars($animal['prix_vente_kg']) ?> €</p>
+
+                                        <!-- Si l'animal n'est pas en auto-vente, afficher l'option d'ajout de date de mort -->
+                                        <?php if ($animal['auto_vente'] == 1): ?>
+                                            <form method="POST" action="<?= constant('BASE_URL') ?>ajouter_date_mort">
+                                                <input type="hidden" name="id_animal" value="<?= $animal['id_animal'] ?>">
+                                                <div class="mb-2">
+                                                    <label for="date_mort_<?= $animal['id_animal'] ?>">Date de Mort :</label>
+                                                    <input type="date" name="date_mort" id="date_mort_<?= $animal['id_animal'] ?>" class="form-control" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-danger w-100">Ajouter Date Mort</button>
+                                            </form>
+                                        <?php else: ?>
+                                            <p class="text-success">Auto-Vente Activée</p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
