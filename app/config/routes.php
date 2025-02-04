@@ -4,7 +4,7 @@ use app\controllers\LoginController;
 use app\controllers\ModifTypeController;
 use app\controllers\DepotController;
 use app\controllers\VenteController;
-use app\controllers\AnimauxController;
+use app\controllers\MesAnimauxController;
 use app\controllers\FoodController;
 use app\controllers\PrevisionController;
 use app\controllers\StockController;
@@ -17,7 +17,7 @@ $Login_Controller = new LoginController();
 $Modif_Type_Controller = new ModifTypeController();
 $Depot_Controller = new DepotController();
 $Vente_Controller = new VenteController();
-$Animaux_Controller = new AnimauxController();
+$Animaux_Controller = new MesAnimauxController();
 $Food_Controller = new FoodController();
 $Prevision_Controller = new PrevisionController();
 $Stock_Controller = new StockController();
@@ -49,13 +49,10 @@ $router->get('/depot',[$Depot_Controller,'preDepot']);
 $router->post('/depot',[$Depot_Controller,'updateArgent']);
 
 $router->get('/animaux/liste/vente',[$Vente_Controller,'listAnimalsForSale']);
-$router->get('/animaux/liste', [$Animaux_Controller, 'listerAnimaux']);
 
 $router->get('/animaux/achat/@id', [$Vente_Controller,'acheterAnimal']);
 
-$router->post('/animaux/nourrir/@id_animal:[0-9]+', [$Animaux_Controller, 'nourrirAnimal']);
 
-$router->post('/animaux/vendre/@id_animal:[0-9]+', [$Animaux_Controller, 'vendreAnimal']);
 
 $router->get('/liste/alimentation', [$Food_Controller, 'listAliments']);
 
@@ -68,3 +65,5 @@ $router->get('/achat/alimentation', [$Food_Controller, 'acheterAliment']);
 $router->get('/liste/stock', [$Stock_Controller, 'afficherStock']);
 
 $router->get('/reset', [$Reset_Controller, 'reset']);
+
+$router->get('/liste/mesanimaux', [$Animaux_Controller, 'afficherMesAnimaux']);
